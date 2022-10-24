@@ -8,8 +8,8 @@
 		"packages/**"
 	],
 	"scripts": {
-		"start": "cd packages/extension && npm run start-dev",
-		"build": "cd packages/extension && npm run build",
+		"start": "yarn workspace extension start",
+		"build": "yarn workspace extension build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
