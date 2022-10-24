@@ -1,0 +1,20 @@
+{
+	"name": "analog",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"private": true,
+	"workspaces": [
+		"packages/**"
+	],
+	"scripts": {
+		"start": "cd packages/extension && npm run start-dev",
+		"build": "cd packages/extension && npm run build",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/chrome": "^0.0.199"
+	}
+}
