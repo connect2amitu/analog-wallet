@@ -8,9 +8,7 @@
 		"packages/**"
 	],
 	"scripts": {
-		"start": "yarn workspace extension start",
-		"build": "yarn workspace extension build",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"watch": "cd packages/extension-koni && yarn webpack --config webpack.watch.cjs --mode development --watch"
 	},
 	"author": "",
 	"license": "ISC",

@@ -1,0 +1,38 @@
+{
+	"author": "Analog",
+	"description": "Analog Wallet",
+	"homepage_url": "https://www.analog.one/",
+	"name": "Analog - Extension Wallet",
+	"short_name": "Analog Wallet",
+	"manifest_version": 2,
+	"permissions": ["storage", "tabs"],
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": true
+	},
+	"browser_action": {
+		"default_title": "Analog Wallet",
+		"default_popup": "index.html"
+	},
+	"content_scripts": [
+		{
+			"js": ["content.js"],
+			"matches": ["http://*/*", "https://*/*"],
+			"run_at": "document_start"
+		}
+	],
+	"icons": {
+		"18": "images/icon-18x18.png",
+		"48": "images/icon-48x48.png",
+		"72": "images/icon-72x72.png",
+		"128": "images/icon-128x128.png",
+		"144": "images/icon-144x144.png",
+		"152": "images/icon-152x152.png",
+		"192": "images/icon-192x192.png",
+		"384": "images/icon-384x384.png",
+		"512": "images/icon-512x512.png"
+	},
+	"web_accessible_resources": ["page.js"],
+	"content_security_policy": "script-src 'self' blob: 'unsafe-eval' 'wasm-eval'; object-src 'self'",
+	"version": "0.0.1"
+}
