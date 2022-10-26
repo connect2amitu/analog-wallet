@@ -1,6 +1,3 @@
-// Copyright 2019-2022 @polkadot/extension-koni authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
 const path = require('path');
 const webpack = require('webpack');
 
@@ -10,7 +7,7 @@ const ManifestPlugin = require('webpack-extension-manifest-plugin');
 const pkgJson = require('./package.json');
 const manifest = require('./manifest.json');
 
-const packages = ['extension', 'extension-koni', 'extension-koni-ui'];
+const packages = ['extension'];
 
 module.exports = (entry, alias = {}) => ({
 	context: __dirname,

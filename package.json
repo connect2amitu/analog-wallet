@@ -8,7 +8,7 @@
 		"packages/**"
 	],
 	"scripts": {
-		"watch": "cd packages/extension-koni && yarn webpack --config webpack.watch.cjs --mode development --watch"
+		"watch": "cd packages/extension && yarn webpack --config webpack.watch.cjs --mode development --watch"
 	},
 	"author": "",
 	"license": "ISC",

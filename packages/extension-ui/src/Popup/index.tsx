@@ -6,7 +6,7 @@ import { createHashRouter, RouterProvider, NavLink } from "react-router-dom";
 const NavBar = () => {
   return <div>
 
-    <ul style={{ display: "flex", listStyle: "none" }}>
+    <ul style={{ display: "flex", listStyle: "none", margin: 0 }}>
       <li style={{ marginRight: 5 }}> <NavLink to="/">Home</NavLink></li>
       <li style={{ marginRight: 5 }}> <NavLink to="/dashboard">Dashboard</NavLink></li>
       <li style={{ marginRight: 5 }}> <NavLink to="/about">About</NavLink></li>
@@ -19,9 +19,8 @@ const NavBar = () => {
 
 const Home = () => {
   return <div>
-
     <NavBar />
-    <h2> Home</h2>
+    <h2> Home 1.0</h2>
 
   </div>;
 }
