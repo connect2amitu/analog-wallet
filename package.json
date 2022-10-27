@@ -8,12 +8,17 @@
 		"packages/**"
 	],
 	"scripts": {
-    "build:ui": "cd packages/extension && yarn webpack --config webpack.extension.cjs --mode production",
-    "watch": "cd packages/extension && yarn webpack --config webpack.watch.cjs --mode development --watch"
+		"start": "yarn watch",
+		"build:extra": "yarn build:i18n && yarn build:ui",
+		"build:ui": "cd packages/extension && yarn webpack --config webpack.extension.cjs --mode production",
+		"build:i18n": "i18next-scanner --config i18next-scanner.config.js",
+		"watch": "cd packages/extension && yarn webpack --config webpack.watch.cjs --mode development --watch"
 	},
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@types/chrome": "^0.0.199"
-	}
+		"@types/chrome": "^0.0.199",
+		"i18next-scanner": "^4.1.0",
+		"typescript": "^4.8.4"
+	} 
 }

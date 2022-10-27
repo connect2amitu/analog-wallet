@@ -1,6 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 import NavBar from "../Navbar";
 import Button from "../../components/Button"
-import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
 
@@ -11,9 +12,8 @@ const Dashboard = () => {
   return (
     <div>
       <NavBar />
-      <h2>Dashboard</h2>
-      <p>{t("react-i18next")}</p>
-      <Button label="Testing button" />
+      <h2>{t("Dashboard")}</h2>
+      <Button label={t("Ok")} />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 {
 	"author": "Analog Team",
-	"description": "Analog Wallet",
+	"description": "Analog Wallet Dev",
 	"homepage_url": "https://www.analog.one/",
-	"name": "Analog - Extension Wallet",
-	"short_name": "Analog Wallet",
+	"name": "Analog - Extension Wallet Dev",
+	"short_name": "Analog Wallet Dev",
 	"manifest_version": 2,
 	"permissions": ["storage", "tabs"],
 	"background": {
@@ -11,7 +11,7 @@
 		"persistent": true
 	},
 	"browser_action": {
-		"default_title": "Analog Wallet",
+		"default_title": "Analog Wallet Dev",
 		"default_popup": "index.html"
 	},
 	"content_scripts": [
