@@ -3,22 +3,22 @@
   "compilerOptions": {
     "composite": true,
     "paths": {
-      "@polkadot/extension": [
+      "@analog/extension": [
         "extension/src"
       ],
-      "@polkadot/extension/*": [
+      "@analog/extension/*": [
         "extension/src/*"
       ],
-      "@polkadot/extension-ui": [
+      "@analog/extension-ui": [
         "extension-ui/src"
       ],
-      "@polkadot/extension-ui/*": [
+      "@analog/extension-ui/*": [
         "extension-ui/src/*"
       ],
-      "@polkadot/extension-services": [
+      "@analog/extension-services": [
         "extension-services/src"
       ],
-      "@polkadot/extension-services/*": [
+      "@analog/extension-services/*": [
         "extension-services/src/*"
       ]
     },

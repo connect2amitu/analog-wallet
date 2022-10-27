@@ -3,7 +3,7 @@
 	"contributors": [],
 	"license": "Apache-2.0",
 	"maintainers": [],
-	"name": "@polkadot/extension",
+	"name": "@analog/extension",
 	"sideEffects": false,
 	"type": "module",
 	"version": "0.2.10-1",
