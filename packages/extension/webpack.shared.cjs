@@ -7,7 +7,7 @@ const ManifestPlugin = require('webpack-extension-manifest-plugin');
 const pkgJson = require('./package.json');
 const manifest = require('./manifest.json');
 
-const packages = ['extension'];
+const packages = ['extension',"extension-services"];
 
 module.exports = (entry, alias = {}) => ({
 	context: __dirname,

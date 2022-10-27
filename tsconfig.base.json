@@ -1,0 +1,27 @@
+{
+  "extends": "@polkadot/dev/config/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "paths": {
+      "@polkadot/extension": [
+        "extension/src"
+      ],
+      "@polkadot/extension/*": [
+        "extension/src/*"
+      ],
+      "@polkadot/extension-ui": [
+        "extension-ui/src"
+      ],
+      "@polkadot/extension-ui/*": [
+        "extension-ui/src/*"
+      ],
+      "@polkadot/extension-services": [
+        "extension-services/src"
+      ],
+      "@polkadot/extension-services/*": [
+        "extension-services/src/*"
+      ]
+    },
+    "skipLibCheck": true
+  }
+}
