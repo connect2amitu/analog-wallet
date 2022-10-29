@@ -1,10 +1,16 @@
-import { useMemo } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 
 import i18next from "../../i18n/i18n"
-import getLanguageOptions from "../../utils/getLanguageOptions";
+import { Theme, ThemeSwitchContext } from "../../components";
+import { LANGUAGES } from "../../utils/constants";
+
+
+interface ThemeProps {
+  theme: Theme;
+}
 
 
 const MainNav = styled.ul`
@@ -17,25 +23,40 @@ const MainNav = styled.ul`
   padding: 0 !important;
 `
 
-const NavLi = styled.li`
+const NavLi = styled.li(({ theme }: ThemeProps) => `
   text-align: center;
   margin-right: 15px;
-`
+  a{
+  text-decoration: none;
+  color: ${theme.textColor};
+ }
+`);
+
+
+
+
 
 const NavBar = () => {
 
   const { t } = useTranslation();
 
-  const languageOptions = useMemo(() => getLanguageOptions(), []);
+  const setTheme = useContext(ThemeSwitchContext);
+  const themeContext = useContext(ThemeContext as React.Context<Theme>);
+
+  const languageOptions = useMemo(() => LANGUAGES, []);
   const onChange = (value: string): void => {
-    // console.info('value=>', value);
     i18next.changeLanguage(value)
     localStorage.setItem("lang", value)
   }
 
   const lang = localStorage.getItem("lang") ?? "en"
 
+  const _onChangeTheme = useCallback(
+    (val: "dark" | "light"): void => setTheme(val),
+    [setTheme]
+  );
 
+  console.info('themeContext=>', themeContext);
   return (
     <div>
 
@@ -76,6 +97,25 @@ const NavBar = () => {
               height={20}
             />
           </a>
+        </NavLi>
+        <NavLi>
+          <select
+            onChange={(event) => {
+              console.info('event.target.value=>', event.target.value);
+              _onChangeTheme(event.target.value === "dark" ? "dark" : "light")
+            }}
+            value={themeContext.id}
+
+          >
+            {["light", "dark"].map((val): React.ReactNode => (
+              <option
+                key={val}
+                value={val}
+              >
+                {val}
+              </option>
+            ))}
+          </select>
         </NavLi>
       </MainNav>
 

@@ -1,6 +1,5 @@
 import languageCache from './cache';
 
-console.info('languageCache =>', languageCache)
 type Callback = (error: string | null, data: unknown) => void;
 
 type LoadResult = [string | null, Record<string, string> | boolean];

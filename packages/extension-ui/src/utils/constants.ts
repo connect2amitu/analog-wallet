@@ -3,7 +3,7 @@ interface Option {
   value: string | number;
 }
 
-const getLanguageOptions = (): Option[] => [
+export const LANGUAGES: Option[] = [
   {
     text: 'English',
     value: 'en'
@@ -17,5 +17,3 @@ const getLanguageOptions = (): Option[] => [
     value: 'hi'
   }
 ]
-
-export default getLanguageOptions 
