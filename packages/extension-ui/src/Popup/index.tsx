@@ -1,6 +1,9 @@
 import { RouterProvider } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { AppStateProvider } from '../context';
+import containers from '../context/state';
+
 import router from './routing';
 
 const Container = styled.div`
@@ -9,7 +12,11 @@ const Container = styled.div`
 `
 
 const Popup = () => {
-  return <Container><RouterProvider router={router} /></Container>;
+  return <Container>
+    <AppStateProvider containers={containers}>
+      <RouterProvider router={router} />
+    </AppStateProvider>
+  </Container>;
 };
 
 export default Popup;

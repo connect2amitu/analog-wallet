@@ -10,7 +10,6 @@ const Dashboard = () => {
   return (
     <div>
       <NavBar />
-
       <h2>{t("Dashboard")}</h2>
       <Button label={t("Ok")} />
     </div>
