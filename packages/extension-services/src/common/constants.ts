@@ -15,5 +15,9 @@ export const LANGUAGES: Option[] = [
   {
     text: 'Hindi',
     value: 'hi'
+  },
+  {
+    text: 'Spanish',
+    value: 'es'
   }
 ]

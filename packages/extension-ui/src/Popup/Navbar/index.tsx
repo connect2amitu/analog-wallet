@@ -5,7 +5,7 @@ import styled, { ThemeContext } from "styled-components";
 
 import i18next from "../../i18n/i18n"
 import { Theme, ThemeSwitchContext } from "../../components";
-import { LANGUAGES } from "../../utils/constants";
+import { LANGUAGES } from "@analog/extension-services/common/constants";
 
 interface ThemeProps {
   theme: Theme;
