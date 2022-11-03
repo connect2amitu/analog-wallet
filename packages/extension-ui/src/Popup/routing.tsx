@@ -1,10 +1,11 @@
+import { lazy } from 'react';
 import { createHashRouter } from 'react-router-dom';
 
-import About from './About';
-import Counter from './Counter';
-import Dashboard from './Dashboard';
-import Home from './Home';
-import Users from './Users';
+const About = lazy(() => import('./About'));
+const Counter = lazy(() => import('./Counter'));
+const Dashboard = lazy(() => import('./Dashboard'));
+const Home = lazy(() => import('./Home'));
+const Users = lazy(() => import('./Users'));
 
 const router = createHashRouter([
   {
