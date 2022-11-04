@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import View from './components/View';
 
@@ -16,9 +16,7 @@ export default function createView(Entry: React.ComponentType, rootId = 'root'):
   root.render(
     <React.StrictMode>
       <View>
-      <Suspense fallback='...'>
         <Entry />
-      </Suspense>
       </View>
     </React.StrictMode>);
 }

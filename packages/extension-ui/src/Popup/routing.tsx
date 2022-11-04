@@ -1,32 +1,32 @@
 import { lazy } from 'react';
 import { createHashRouter } from 'react-router-dom';
 
-const About = lazy(() => import('./About'));
-const Counter = lazy(() => import('./Counter'));
-const Dashboard = lazy(() => import('./Dashboard'));
-const Home = lazy(() => import('./Home'));
-const Users = lazy(() => import('./Users'));
+const ImportSeed = lazy(() => import('./ImportSeed'));
+const RestoreJson = lazy(() => import('./RestoreJson'));
+const NewAccount = lazy(() => import('./NewAccount'));
+const Welcome = lazy(() => import('./Welcome'));
+const ImportPrivateKey = lazy(() => import('./ImportPrivateKey'));
 
 const router = createHashRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <Welcome />,
   },
   {
-    path: '/dashboard',
-    element: <Dashboard />
+    path: '/account/create',
+    element: <NewAccount />
   },
   {
-    path: '/about',
-    element: <About />,
+    path: '/account/import-seed',
+    element: <ImportSeed />,
   },
   {
-    path: '/users',
-    element: <Users />,
+    path: '/account/import-metamask-private-key',
+    element: <ImportPrivateKey />,
   },
   {
-    path: '/counter',
-    element: <Counter />,
+    path: '/account/restore-json',
+    element: <RestoreJson />,
   },
 ]);
 

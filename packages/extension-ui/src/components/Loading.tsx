@@ -20,7 +20,7 @@ const LoadingComponent = styled(Loading)`
   justify-content: center;
 
   img{
-    animation: bounce 3s infinite alternate;
+    /* animation: bounce 3s infinite alternate; */
 
     @keyframes bounce {
       0%   { transform: scale(1,1)      translateY(0); }

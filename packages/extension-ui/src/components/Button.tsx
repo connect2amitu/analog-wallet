@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Theme } from "./themes";
 
-const Button = ({ label = "Default Text", className = "" }) => <button className={className} >{label}</button>
+const Button = ({ label = "Default Text", className = "", onClick = () => { } }) => <button className={className} onClick={onClick}>{label}</button>
 
 export default styled(Button)(({ theme }: { theme: Theme }) => `
   background: ${theme.buttonBackground};

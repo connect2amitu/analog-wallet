@@ -13,7 +13,7 @@ interface Props {
   className?: string;
 }
 
-function View ({ children, className }: Props): React.ReactElement<Props> {
+function View({ children, className }: Props): React.ReactElement<Props> {
   const [theme, setTheme] = useState(chooseTheme());
 
   const switchTheme = useCallback(
