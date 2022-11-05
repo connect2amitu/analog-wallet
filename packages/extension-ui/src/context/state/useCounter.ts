@@ -1,6 +1,10 @@
 import { useReducer } from "react";
 
-const reducer = (state: any, action: any) => { return { ...state, ...action } }
+interface State {
+  count: number
+}
+
+const reducer = (state: State, action: any) => { return { ...state, ...action } }
 
 const initialArgs = { count: 0 };
 

@@ -8,6 +8,7 @@
 	"type": "module",
 	"version": "0.2.10-1",
 	"dependencies": {
+    "@analog/extension-ui": "0.1.0"
 	},
 	"devDependencies": {
 		"@polkadot/dev": "^0.65.23",
