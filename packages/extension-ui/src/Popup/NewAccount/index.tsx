@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "../../components/common/Toast/ToastProvider";
 import AppHeader from "../../components/common/AppHeader";
 import Container from "../../components/common/Container";
+import { Button } from "../../components";
 
 const NewAccount = () => {
   const { t } = useTranslation();
@@ -11,9 +12,9 @@ const NewAccount = () => {
   return (
     <div>
       <AppHeader />
-      <button onClick={()=>show("hello world")}>show toast</button>
       <Container>
         <h2>{t("Create an account")}</h2>
+        <Button onClick={() => show("hello world")} label={t<string>("Show Toast")} />
       </Container>
     </div>
   );

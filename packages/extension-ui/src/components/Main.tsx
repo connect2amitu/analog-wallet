@@ -1,14 +1,7 @@
-// Copyright 2019-2022 @polkadot/extension-ui authors & contributors
-// SPDX-License-Identifier: Apache-2.0
-
-
 import React from 'react';
 import styled from 'styled-components';
 
-interface ThemeProps {
-  theme: any;
-}
-
+import { ThemeProps } from '../types';
 
 interface Props {
   children: React.ReactNode;
@@ -32,6 +25,7 @@ export default styled(Main)(({ theme }: ThemeProps) => `
   font-size: ${theme.fontSize};
   line-height: ${theme.lineHeight};
   border: 1px solid ${theme.inputBorderColor};
+  overflow:auto;
 
   * {
     font-family: ${theme.fontFamily};

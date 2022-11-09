@@ -8,7 +8,7 @@ interface ToastProviderProps {
 
 const noop = (): void => undefined;
 
-const ToastContext = React.createContext<({show: (message: string) => void})>({ show: noop });
+const ToastContext = React.createContext<({ show: (message: string) => void })>({ show: noop });
 const TOAST_TIMEOUT = 1500;
 
 const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<ToastProviderProps> => {
@@ -16,7 +16,9 @@ const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<Toa
   const [visible, setVisible] = useState(false);
 
   const show = useCallback((message: string): () => void => {
-    const timerId = setTimeout(() => setVisible(false), TOAST_TIMEOUT);
+    const timerId = setTimeout(() => {
+      setVisible(false)
+    }, TOAST_TIMEOUT);
 
     setContent(message);
     setVisible(true);
@@ -40,7 +42,7 @@ export default ToastProvider;
 ToastProvider.displayName = 'Toast';
 
 
-export function useToast (): {show: (message: string) => void} {
+export function useToast(): { show: (message: string) => void } {
   return useContext(ToastContext);
 }
 

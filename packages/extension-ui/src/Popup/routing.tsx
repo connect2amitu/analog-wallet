@@ -4,12 +4,17 @@ import { createHashRouter } from 'react-router-dom';
 const ImportSeed = lazy(() => import('./ImportSeed'));
 const RestoreJson = lazy(() => import('./RestoreJson'));
 const NewAccount = lazy(() => import('./NewAccount'));
+const Components = lazy(() => import('./Components'));
 const Welcome = lazy(() => import('./Welcome'));
 const ImportPrivateKey = lazy(() => import('./ImportPrivateKey'));
 
 const router = createHashRouter([
   {
     path: '/',
+    element: <Components />,
+  },
+  {
+    path: '/welcome',
     element: <Welcome />,
   },
   {

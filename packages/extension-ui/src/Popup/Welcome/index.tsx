@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import LoadingComponent from "../../components/Loading";
+import LoadingComponent from "../../components/ScreenLoader";
 import { Button } from "../../components";
 import AppHeader from "../../components/common/AppHeader";
 import { useEffect, useState } from "react";
@@ -32,7 +32,7 @@ const Welcome = ({ className }: { className: string }) => {
       <LoadingComponent text="" />
       <span className="title">{t("Welcome Back")}</span>
       <span className="subtitle">{t("The decentralized web awaits")}</span>
-      <Button label={t("Get Started")} onClick={() => openMenuList()} />
+      <Button onClick={() => openMenuList()} >{t("Get Started")}</Button>
     </>
   }
 
@@ -43,10 +43,10 @@ const Welcome = ({ className }: { className: string }) => {
 
   const MenuScreen = () => {
     return <div className="menu-list">
-      <Button label={t("Create new account")} onClick={() => goTo("/account/create")} />
-      <Button label={t("Import account from pre-existing seed")} onClick={() => goTo("/account/import-seed")} />
-      <Button label={t("Import private key from MetaMask")} onClick={() => goTo("/account/import-metamask-private-key")} />
-      <Button label={t("Restore account from JSON backup file")} onClick={() => goTo("/account/restore-json")} />
+      <Button onClick={() => goTo("/account/create")} >{t("Create new account")}</Button>
+      <Button onClick={() => goTo("/account/import-seed")} >{t("Import account from pre-existing seed")}</Button>
+      <Button onClick={() => goTo("/account/import-metamask-private-key")} >{t("Import private key from MetaMask")}</Button>
+      <Button onClick={() => goTo("/account/restore-json")} >{t("Restore account from JSON backup file")}</Button>
     </div>
   }
 

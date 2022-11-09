@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
+import DropDown from '../DropDown'
 
 const AppHeader = ({ className }: { className?: string }) => {
+
+  const onChange = useCallback((val: any) => {
+    console.info('onChange val=>', val);
+  }, [])
+
   return (
     <div className={className}>
       <div className='app-header'>
         <div className='contents'>
           <img src="https://www.analog.one/wp-content/uploads/2022/01/logo-120x24.png" alt="logo" />
-          <div className='profile-menu'>
-            <svg x="0" y="0" width="32" height="32"><rect x="0" y="0" width="32" height="32" transform="translate(1.203787779538165 -0.327310720631151) rotate(397.4 16 16)" fill="#01828E"></rect><rect x="0" y="0" width="32" height="32" transform="translate(6.249576582399076 -16.94462940837736) rotate(312.8 16 16)" fill="#C81444"></rect><rect x="0" y="0" width="32" height="32" transform="translate(22.2687514845748 3.2296468309632473) rotate(151.8 16 16)" fill="#FB1855"></rect></svg>
-          </div>
+          <DropDown
+            onChange={onChange}
+            trigger={
+              <div className='profile-menu'>
+                <svg x="0" y="0" width="32" height="32"><rect x="0" y="0" width="32" height="32" transform="translate(1.203787779538165 -0.327310720631151) rotate(397.4 16 16)" fill="#01828E"></rect><rect x="0" y="0" width="32" height="32" transform="translate(6.249576582399076 -16.94462940837736) rotate(312.8 16 16)" fill="#C81444"></rect><rect x="0" y="0" width="32" height="32" transform="translate(22.2687514845748 3.2296468309632473) rotate(151.8 16 16)" fill="#FB1855"></rect></svg>
+              </div>
+            }
+            options={[{ name: "Option 1", value: "Option 1" }, { name: "Option 2", value: "Option 2" }]}
+          />
         </div>
       </div>
     </div>

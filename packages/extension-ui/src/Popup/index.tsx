@@ -3,14 +3,14 @@ import { RouterProvider } from 'react-router-dom';
 
 import { AppStateProvider } from '../context';
 import containers from '../context/state';
-import LoadingComponent from '../components/Loading';
+import { ScreenLoader } from '../components';
 
 import router from './routing';
 
 const Popup = () => {
   return <React.Fragment>
     <AppStateProvider containers={containers}>
-      <Suspense fallback={<LoadingComponent />}>
+      <Suspense fallback={<ScreenLoader />}>
         <RouterProvider router={router} />
       </Suspense>
     </AppStateProvider>
