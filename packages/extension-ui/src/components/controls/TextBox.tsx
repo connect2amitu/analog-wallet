@@ -1,24 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Controller } from "react-hook-form";
+import { get } from 'lodash'
 
-const TextBox = ({ className, id = "", label, ...rest }: any) => {
+interface Props {
+  label: string;
+  control?: any;
+  errors?: any;
+  name: string;
+  type: "text" | "password";
+  className?: string;
+  value?: string;
+  onChange?: (val: string) => void | undefined;
+}
+
+const TextBox = (props: Props) => {
+  const { label = "", name, control, errors, className, value = "", onChange, type = "text" } = props;
 
   return (
     <div className={className}>
-      <input
-        autoComplete="off"
-        role="presentation"
-        placeholder=" "
-        {...rest}
-      />
-      <label className="field-placeholder" htmlFor={id}>
-        {label}
-      </label>
+      <div className={`container ${get(errors, `${name}.message`) ? "error" : ""}`}>
+        {
+          control ?
+            <Controller
+              render={({ field }) => <input {...field} type={type} autoComplete="off" placeholder=" " />}
+              name={name}
+              control={control}
+              defaultValue=""
+            /> : <input autoComplete="off" placeholder=" " name={name} value={value} type={type} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
+        }
+        <label className="field-placeholder" > {label} </label>
+      </div>
+      {get(errors, `${name}.message`) &&
+        <span className='error-message'>
+          {get(errors, `${name}.message`, "")}
+        </span>
+      }
     </div>
   );
 };
 
 export default styled(TextBox)`
+height: auto;
+margin-top: 10px;
+
+.container{
   position: relative;
   height: 50px;
   padding: 0 12px;
@@ -27,7 +53,10 @@ export default styled(TextBox)`
   background: rgba(51, 51, 51, 0.1);
   color: rgba(255, 255, 255, 0.8);
   width: auto;
-  overflow: hidden;
+
+  &.error{
+    border-color: rgb(244, 67, 54);
+  }
 
   input{
     border: none;
@@ -41,18 +70,16 @@ export default styled(TextBox)`
 
     color: #333333;
     background: transparent;
-    padding-left: 0;
+    padding-left: 5px;
 
-    &:focus {
-      outline: none;
-    }
     &:focus,
     &:not(:placeholder-shown) {
+      outline: none;
       border-color: transparent;
-      margin: 0px 0 0 5px;
       ~ label {
         //Come up with a calculation for this
         top: calc(30% - 12px);
+        left: 12px;
         transform: translate(5px, 0%);
         transition: all 0.2s;
         font-weight: 400;
@@ -60,25 +87,23 @@ export default styled(TextBox)`
         color: rgba(51, 51, 51, 0.6);
       }
     }
-
-    &::-webkit-input-placeholder {
-      color: transparent;
-    }
-    &::-moz-placeholder {
-      color: transparent;
-    }
-    &:-ms-input-placeholder {
-      color: transparent;
-    }
   }
 
   label{
     position: absolute;
     top: 50%;
+    left: 15px;
     transform: translate(5px, -50%);
     pointer-events: none;
     transition: all 0.14s ease-in-out;
     font-size: 1rem;
     color: rgba(51, 51, 51, 0.6);
   }
+}
+
+.error-message{
+  color: rgb(244, 67, 54);
+    padding-left: 19px;
+    font-size: 12px;
+}
 `;

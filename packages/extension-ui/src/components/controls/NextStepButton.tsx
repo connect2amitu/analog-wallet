@@ -7,7 +7,7 @@ import next from '../../assets/icons/caret-right.svg';
 
 type Props = React.ComponentProps<typeof Button>;
 
-function NextStepButton({ children, showIcon = true, ...props }: Props): React.ReactElement<Props> {
+const NextStepButton = ({ children, showIcon = true, ...props }: Props): React.ReactElement<Props> => {
   return (
     <Button {...props}>
       {children}

@@ -17,25 +17,25 @@ const Tabs = ({ limit, value, className, onChange = () => { } }: Props) => {
     <div className={className}>
       {
         [...Array(limit)].map((o, index) =>
-          <div onClick={() => onChange(index + 1)} key={index} className={`tab ${index < value ? "active" : ""}`} />)
+          <div onClick={() => onChange(index + 1)} key={index} className={`tab${index < value ? " active" : ""}`} />)
       }
     </div>
   )
 }
 
-export default styled(Tabs)`
+export default styled(Tabs)(({ theme }: Props) => `
 display: flex;
 justify-content: center;
 
 .tab{
-  background: rgba(51, 51, 51, 0.1);
+  background: ${theme.secondaryColor};
   border-radius: 10px;
   width: 40px;
   height: 6px;
   margin-left: 12px;
   cursor: pointer;
   &.active{
-    background: #333333;
+    background: ${theme.primaryColor};
   }
 }
-`
+`)

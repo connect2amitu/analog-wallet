@@ -24,7 +24,8 @@ export default styled(Toast) <{ visible: boolean }>`
   line-height: 7px;
   top: 69px;
   left: calc(50% - 50px);
-  background: #efefef;
+  background: #7C7C7C;
+  color: #0E0A0A;
   padding: 12px;
   border-radius: 40px;
   && {

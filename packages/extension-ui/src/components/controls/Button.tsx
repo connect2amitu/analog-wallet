@@ -14,10 +14,12 @@ interface Props extends ThemeProps {
   inverted?: boolean;
   onClick?: () => void | Promise<void | boolean>;
   to?: string;
+  type?: "button" | "submit" | "reset";
 }
 
-function Button({ children, className = '', isBusy, isDisabled, onClick, to, inverted = false }: Props): React.ReactElement<Props> {
-  const _onClick = useCallback(
+const Button = ({ children, className = '', isBusy, isDisabled, onClick, to, inverted = false, type = "button" }: Props): React.ReactElement<Props> => {
+
+  const onClickHandler = useCallback(
     (): void => {
       if (isBusy || isDisabled) {
         return;
@@ -34,9 +36,10 @@ function Button({ children, className = '', isBusy, isDisabled, onClick, to, inv
 
   return (
     <button
+      type={type}
       className={`${className} ${(isDisabled || isBusy) ? 'is-disabled' : ''} ${isBusy ? 'is-busy' : ''} ${inverted ? 'inverted' : ""}`}
       disabled={isDisabled || isBusy}
-      onClick={_onClick}
+      onClick={onClickHandler}
     >
       <div className='children'>{children}</div>
       <div className='button__disabled-overlay' />
@@ -46,7 +49,7 @@ function Button({ children, className = '', isBusy, isDisabled, onClick, to, inv
 }
 
 export default styled(Button)(({ isDanger, theme }: Props) => `
-  background: ${isDanger ? theme.buttonBackgroundDanger : theme.buttonBackground};
+  background: ${isDanger ? theme.buttonBackgroundDanger : theme.primaryColor};
   cursor: pointer;
   display: block;
   width: 100%;
@@ -60,7 +63,6 @@ export default styled(Button)(({ isDanger, theme }: Props) => `
   padding: 0 21px;
   position: relative;
   text-align: center;
-
 
   .children {
     font-family: ${theme.fontFamily};
@@ -103,9 +105,9 @@ export default styled(Button)(({ isDanger, theme }: Props) => `
     }
   }
   &.inverted {  
-    border: 1px solid ${theme.buttonBackground};
+    border: 1px solid ${theme.borderColor};
     background: ${theme.buttonTextColor};
-    color: ${theme.buttonBackground};
+    color: ${theme.textColor2};
   }
 
   &.is-disabled .button__disabled-overlay {
