@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { useToast } from "../../components/common/Toast/ToastProvider";
+import { useToast } from "../../components/toast/ToastProvider";
 import AppHeader from "../../components/common/AppHeader";
 import Container from "../../components/common/Container";
 import { Button } from "../../components";

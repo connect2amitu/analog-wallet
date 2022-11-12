@@ -31,32 +31,32 @@ export default styled(Switch)(({ theme }: ThemeProps) => `
   .form-switch i {
     position: relative;
     display: inline-block;
-    width: 46px;
-    height: 26px;
+    width: 40px;
+    height: 24px;
     background-color: #e6e6e6;
     border-radius: 23px;
     vertical-align: text-bottom;
     transition: all 0.3s linear;
   }
 
-  /* .form-switch i::before {
+  .form-switch i::before {
     content: "";
     position: absolute;
     left: 0;
-    width: 42px;
-    height: 22px;
+    width: 36px;
+    height: 20px;
     background-color: rgba(51, 51, 51, 0.2);
     border-radius: 11px;
     transform: translate3d(2px, 2px, 0) scale3d(1, 1, 1);
     transition: all 0.25s linear;
-  } */
+  }
 
   .form-switch i::after {
     content: "";
     position: absolute;
     left: 0;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     background-color: #fff;
     border-radius: 11px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24);
@@ -65,7 +65,7 @@ export default styled(Switch)(({ theme }: ThemeProps) => `
   }
 
   .form-switch:active i::after {
-    width: 28px;
+    width: 25px;
     transform: translate3d(2px, 2px, 0);
   }
 
@@ -86,6 +86,6 @@ export default styled(Switch)(({ theme }: ThemeProps) => `
   }
 
   .form-switch input:checked+i::after {
-    transform: translate3d(22px, 2px, 0);
+    transform: translate3d(18px, 2px, 0);
   }
 `);

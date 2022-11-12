@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import styled, { ThemeContext } from "styled-components";
 import * as Yup from 'yup';
 
-
-import { Button, Checkbox, Loader, NextStepButton, Switch, Tabs, TextBox, ThemeSwitchContext } from "../../components";
+import { Button, Checkbox, Dialog, Loader, NextStepButton, Switch, Tabs, TextBox, ThemeSwitchContext } from "../../components";
 import Container from "../../components/common/Container";
 import { toShortAddress } from "../../shared/functions";
 
@@ -15,10 +14,8 @@ import DownloadIcon from "../../assets/icons/download.svg";
 import TwitterIcon from "../../assets/icons/social/twitter.svg";
 import DiscordIcon from "../../assets/icons/social/discord.svg";
 import { ThemeProps, Theme } from "../../types";
-
-
-
-
+import { useToast } from "../../components/toast/ToastProvider";
+import NavBar from "../Navbar";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -31,12 +28,33 @@ const validationSchema = Yup.object().shape({
   acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required')
 });
 
-
 const Components = ({ className }: { className: string }) => {
   const [step, setStep] = useState(0);
 
+
+  // Lowercase & Uppercase
+  // Number (0-9)
+  // Special Character (!@#$%^&*)
+  // Atleast 8 Character
+
+  const [error, setError] = useState<{
+    case: null | boolean;
+    number: null | boolean;
+    specialChar: null | boolean;
+    limit: null | boolean;
+    strength: number
+  }>({
+    case: null,
+    number: null,
+    specialChar: null,
+    limit: null,
+    strength: 0
+  })
+
   const setTheme = useContext(ThemeSwitchContext);
   const themeContext = useContext(ThemeContext as React.Context<Theme>);
+
+  const { show } = useToast()
 
   const _onChangeTheme = useCallback(
     (val: "dark" | "light"): void => setTheme(val),
@@ -50,12 +68,92 @@ const Components = ({ className }: { className: string }) => {
   });
 
 
+
+  const checkStrength = (password: string) => {
+    console.info('password=>', password);
+
+    const _error = { ...error };
+
+
+    //If password contains both lower and uppercase characters
+    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
+      _error.case = true
+    } else {
+      _error.case = false
+    }
+    //If it has numbers and characters
+    if (password.match(/([0-9])/)) {
+      _error.number = true
+    } else {
+      _error.number = false
+    }
+    //If it has one special character
+    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
+      _error.specialChar = true
+    } else {
+      _error.specialChar = false
+    }
+    //If password is greater than 7
+    if (password.length > 7) {
+      _error.limit = true
+    } else {
+      _error.limit = false
+    }
+
+
+    let strength = 0;
+    if (_error.case) {
+      strength++;
+    }
+    if (_error.limit) {
+      strength++;
+    }
+    if (_error.number) {
+      strength++;
+    }
+    if (_error.specialChar) {
+      strength++;
+    }
+
+    console.info('_error=>', _error);
+    _error.strength = strength
+    setError(_error)
+  }
+
+  console.info('error=>', error);
   return (
     <div className={className}>
       <Container>
-        <Button>Primary Button</Button>
+
+
+
+        <NavBar />
+
+        <TextBox type="password" label="Password" name="password" onChange={(value: string) => checkStrength(value)} />
+
+
+        <div id="popover-password" style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start'
+        }}>
+          <br />
+
+          <Tabs limit={4} value={error.strength} />
+          <div style={{ color: error.case ? "" : "green" }}>{error.case ? "✅" : "❌"}Lowercase &amp; Uppercase</div>
+          <div style={{ color: error.number ? "" : "green" }}>{error.number ? "✅" : "❌"}Number (0-9)</div>
+          <div style={{ color: error.specialChar ? "" : "green" }}>{error.specialChar ? "✅" : "❌"}Special Character (!@#$%^&*)</div>
+          <div style={{ color: error.limit ? "" : "green" }}>{error.limit ? "✅" : "❌"}Atleast 8 Character</div>
+        </div >
         <br />
+
+
         <Button inverted={true}>Inverted Button</Button>
+        <br />
+        <Button onClick={() => {
+          show("Hello")
+        }}>Show Toast</Button>
         <br />
         <Button isDisabled={true}>Disabled button</Button>
         <br />
@@ -144,20 +242,19 @@ const Components = ({ className }: { className: string }) => {
             <div className=''>
               <Button isDisabled={step >= 3} onClick={() => setStep(prev => prev + 1)} className="action-btn cancel-btn">Continue</Button>
             </div>
-
           </div>
-
         </>
 
-        <Switch
-          value={themeContext.id === "dark"}
-          onChange={(data: boolean) => {
-            _onChangeTheme(data ? "dark" : "light")
-            console.info('Switch data=>', data);
-          }} />
+        <div style={{ display: "flex" }}>
 
+          <Switch
+            value={themeContext.id === "dark"}
+            onChange={(data: boolean) => {
+              _onChangeTheme(data ? "dark" : "light")
+            }} />
+          <span style={{ marginLeft: 5 }}>{themeContext.id === "dark" ? "Light" : "Dark"}</span>
+        </div>
         <br />
-
 
         <form onSubmit={handleSubmit((data: any) => {
           console.info('data=>', data);
@@ -166,7 +263,6 @@ const Components = ({ className }: { className: string }) => {
           <div>
             <TextBox type="password" label="Password" name="password" control={control} errors={errors} />
             <TextBox type="password" label="Confirm Password" name="confirmPassword" control={control} errors={errors} />
-
             <Checkbox name="acceptTerms" control={control} errors={errors} label="I have read and agree to the Terms" />
 
             <div className='action-btn-wrap'>
@@ -177,13 +273,60 @@ const Components = ({ className }: { className: string }) => {
 
         </form>
 
+        {/* <Dialog onClose={() => {
+          console.info('onClose called=>');
+        }}>
+          <Drawer>
+            <DrawerHeader>
+              title
+            </DrawerHeader>
 
+            <DrawerBody>
+              <h1>Body</h1>
+            </DrawerBody>
+
+            <DrawerFooter>
+              <div className='action-btn-wrap'>
+                <Button inverted={true}>Cancel</Button>
+                <Button onClick={() => {
+                  show("Hello")
+                }}>Save</Button>
+              </div>
+            </DrawerFooter>
+          </Drawer>
+        </Dialog> */}
 
         <Loader height={40} width={40} />
-      </Container>
+      </Container >
     </div >
   );
 };
+
+
+// const Drawer = styled.div`
+//   position: absolute;
+//   bottom: 0;
+//   border-radius: 20px 20px 0 0;
+//   background: #18142b;
+//   width: 100%;
+//   border: 1px solid rgba(245, 245, 255, 0.2);
+//   border-radius: 16px 16px 0px 0px;
+//   overflow: hidden;
+// `;
+
+// const DrawerHeader = styled.div`
+//   width: 100%;
+//   position: relative;
+// `;
+
+// const DrawerBody = styled.div`
+//   padding: 15px;
+// `;
+
+// const DrawerFooter = styled.div`
+//   padding: 15px;
+// `;
+
 
 export default styled(Components)(({ theme }: ThemeProps) => `
 .action-btn-wrap{

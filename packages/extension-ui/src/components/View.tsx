@@ -3,7 +3,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 // FIXME We should not import from index when this one is imported there as well
 import { AvailableThemes, chooseTheme, Main, themes, ThemeSwitchContext, Theme } from '.';
-import ToastProvider from './common/Toast/ToastProvider';
+import ToastProvider from './toast/ToastProvider';
 
 interface ThemeProps {
   theme: Theme;
@@ -48,7 +48,6 @@ const BodyTheme = createGlobalStyle<ThemeProps>`
 
   html {
     scrollbar-width: none;
-
     &::-webkit-scrollbar {
       display: none;
     }

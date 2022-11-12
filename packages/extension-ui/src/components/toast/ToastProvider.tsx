@@ -1,15 +1,14 @@
 import React, { useCallback, useContext, useState } from 'react';
 
 import Toast from './Toast';
+import { ToastContext } from '../../context/contexts';
 
 interface ToastProviderProps {
   children?: React.ReactNode;
 }
 
-const noop = (): void => undefined;
 
-const ToastContext = React.createContext<({ show: (message: string) => void })>({ show: noop });
-const TOAST_TIMEOUT = 1500;
+const TOAST_TIMEOUT = 2000;
 
 const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<ToastProviderProps> => {
   const [content, setContent] = useState('');

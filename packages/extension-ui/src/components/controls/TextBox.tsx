@@ -27,7 +27,7 @@ const TextBox = (props: Props) => {
               name={name}
               control={control}
               defaultValue=""
-            /> : <input autoComplete="off" placeholder=" " name={name} value={value} type={type} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
+            /> : <input autoComplete="off" placeholder=" " name={name} defaultValue={value} type={type} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
         }
         <label className="field-placeholder" > {label} </label>
       </div>
