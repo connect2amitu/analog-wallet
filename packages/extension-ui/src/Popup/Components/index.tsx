@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 
 import { Button, Checkbox, Dialog, Loader, NextStepButton, Switch, Tabs, TextBox, ThemeSwitchContext } from "../../components";
 import Container from "../../components/common/Container";
-import { toShortAddress } from "../../shared/functions";
+import { getLogoByNetworkKey, toShortAddress } from "../../shared/functions";
 
 import BackIcon from "../../assets/icons/back.svg";
 import CopyIcon from "../../assets/icons/copy.svg";
@@ -244,6 +244,38 @@ const Components = ({ className }: { className: string }) => {
             </div>
           </div>
         </>
+
+        Image from LogosMap
+        <br />
+
+        <img
+          className='icon'
+          height={24}
+          src={getLogoByNetworkKey("analog")}
+          width={24}
+          alt="icon"
+        />
+        <img
+          className='icon'
+          height={24}
+          src={getLogoByNetworkKey("bifrost")}
+          width={24}
+          alt="icon"
+        />
+        <img
+          className='icon'
+          height={24}
+          src={getLogoByNetworkKey("crust")}
+          width={24}
+          alt="icon"
+        />
+        <img
+          className='icon'
+          height={24}
+          src={getLogoByNetworkKey("dot")}
+          width={24}
+          alt="icon"
+        />
 
         <div style={{ display: "flex" }}>
 
