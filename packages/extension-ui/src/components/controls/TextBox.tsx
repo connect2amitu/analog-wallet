@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Controller } from "react-hook-form";
 import { get } from 'lodash'
+import { ThemeProps } from '@analog/extension-ui/types';
 
 interface Props {
   label: string;
@@ -40,7 +41,7 @@ const TextBox = (props: Props) => {
   );
 };
 
-export default styled(TextBox)`
+export default styled(TextBox)(({ theme }: ThemeProps) => `
 height: auto;
 margin-top: 10px;
 
@@ -48,9 +49,10 @@ margin-top: 10px;
   position: relative;
   height: 50px;
   padding: 0 12px;
-  border-radius: 56px;
+  border-radius: ${theme.borderRadius};
   border:1px solid transparent;
   background: rgba(51, 51, 51, 0.1);
+  /* background: transparent; */
   color: rgba(255, 255, 255, 0.8);
   width: auto;
 
@@ -67,10 +69,10 @@ margin-top: 10px;
     width: 100%;
     bottom: 0px;
     height: 100%;
-
+    background: rgba(51, 51, 51, 0.1);
     color: #333333;
-    background: transparent;
     padding-left: 5px;
+    box-shadow: 0px 3px 30px rgba(15, 0, 64, 0.07);
 
     &:focus,
     &:not(:placeholder-shown) {
@@ -106,4 +108,4 @@ margin-top: 10px;
     padding-left: 19px;
     font-size: 12px;
 }
-`;
+`);

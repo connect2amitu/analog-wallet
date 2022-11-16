@@ -1,6 +1,7 @@
 
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import classNames from 'classnames';
 
 import { ThemeProps } from '../../types';
 import Spinner from '../Spinner';
@@ -11,13 +12,13 @@ interface Props extends ThemeProps {
   isBusy?: boolean;
   isDanger?: boolean;
   isDisabled?: boolean;
-  inverted?: boolean;
   onClick?: () => void | Promise<void | boolean>;
   to?: string;
+  variant?: 'contained' | 'outlined' | 'text'
   type?: "button" | "submit" | "reset";
 }
 
-const Button = ({ children, className = '', isBusy, isDisabled, onClick, to, inverted = false, type = "button" }: Props): React.ReactElement<Props> => {
+const Button = ({ children, className = '', isBusy, isDisabled, onClick, to, type = "button", variant = "contained" }: Props): React.ReactElement<Props> => {
 
   const onClickHandler = useCallback(
     (): void => {
@@ -34,29 +35,36 @@ const Button = ({ children, className = '', isBusy, isDisabled, onClick, to, inv
     [isBusy, isDisabled, onClick, to]
   );
 
+  var btnClass = classNames({
+    [className]: true,
+    'is-disabled': isDisabled || isBusy,
+    'is-busy': isBusy,
+    [variant]: true,
+
+  });
+
   return (
     <button
       type={type}
-      className={`${className} ${(isDisabled || isBusy) ? 'is-disabled' : ''} ${isBusy ? 'is-busy' : ''} ${inverted ? 'inverted' : ""}`}
+      className={btnClass}
       disabled={isDisabled || isBusy}
       onClick={onClickHandler}
     >
       <div className='children'>{children}</div>
-      <div className='button__disabled-overlay' />
-      <Spinner className='button__busy-overlay' />
     </button>
   );
 }
 
-export default styled(Button)(({ isDanger, theme }: Props) => `
+export default styled(Button)(({ isDanger, isDisabled, theme }: Props) => `
   background: ${isDanger ? theme.buttonBackgroundDanger : theme.primaryColor};
+  opacity: ${isDisabled ? 0.1 : 1};
   cursor: pointer;
   display: block;
   width: 100%;
   height: 48px;
   box-sizing: border-box;
   border: none;
-  border-radius: 56px;
+  border-radius: ${theme.borderRadius};
   color: ${theme.buttonTextColor};
   font-size: 16px;
   line-height: 26px;
@@ -67,50 +75,29 @@ export default styled(Button)(({ isDanger, theme }: Props) => `
   .children {
     font-family: ${theme.fontFamily};
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    height: 100%;
   }
 
   &:disabled {
     cursor: default;
   }
 
-  .button__busy-overlay,
-  .button__disabled-overlay {
-    visibility: hidden;
+  &.contained {  
+    /* border: 1px solid ${theme.borderColor}; */
+    background: ${theme.primaryColor};
+    color: ${theme.buttonTextColor};
   }
-
-  .button__disabled-overlay {
-    background: ${theme.overlayBackground};
-    border-radius: 56px;
-    opacity: 0.7;
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
+  &.outlined {  
+    border: 1px solid #2406E2;
+    background: #fff;
+    color: #2406E2;
   }
-
-  svg {
-    margin-right: 0.3rem;
-  }
-
-  &.is-busy {
-    background: rgba(96,96,96,0.15);
-
-    .children {
-      opacity: 0.25;
-    }
-
-    .button__busy-overlay {
-      visibility: visible;
-    }
-  }
-  &.inverted {  
-    border: 1px solid ${theme.borderColor};
-    background: ${theme.buttonTextColor};
-    color: ${theme.textColor2};
-  }
-
-  &.is-disabled .button__disabled-overlay {
-    visibility: visible;
+  &.text {  
+    border: 1px solid transparent;
+    background: transparent;
+    color: #2406E2;
   }
 `);

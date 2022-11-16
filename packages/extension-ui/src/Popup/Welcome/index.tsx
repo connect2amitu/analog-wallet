@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import LoadingComponent from "../../components/ScreenLoader";
 import { Button } from "../../components";
-import AppHeader from "../../components/common/AppHeader";
 import { useEffect, useState } from "react";
+import SpiralSphereIcon from "../../assets/icons/spiralsphere.svg";
+
 import { useNavigate } from "react-router";
 
 const Welcome = ({ className }: { className: string }) => {
@@ -29,10 +29,17 @@ const Welcome = ({ className }: { className: string }) => {
 
   const WelcomeScreen = () => {
     return <>
-      <LoadingComponent text="" />
+      <img
+        className='icon'
+        src={SpiralSphereIcon}
+        height={90}
+        width={90}
+        alt="icon"
+      />
       <span className="title">{t("Welcome Back")}</span>
       <span className="subtitle">{t("The decentralized web awaits")}</span>
-      <Button onClick={() => openMenuList()} >{t("Get Started")}</Button>
+      <Button className="create-wallet-btn" onClick={() => openMenuList()} >{t("Create Wallet")}</Button>
+      <Button className="already-have-account" onClick={() => openMenuList()} >{t("I already have a wallet")}</Button>
     </>
   }
 
@@ -63,7 +70,6 @@ const Welcome = ({ className }: { className: string }) => {
 
   return (
     <div className={className}>
-      <AppHeader />
       <div className="container">
         <RenderComponent />
       </div>
@@ -79,17 +85,37 @@ export default styled(Welcome)`
     align-items: center;
     margin: 30px 47px;
     .title{
-      font-size: 32px;
-    line-height: 44px;
-    color: rgb(255, 255, 255);
-    font-weight: 500;
+      font-weight: 700;
+font-size: 24px;
+line-height: 36px;
+text-align: center;
+color: #0F0040;
+margin-top:11px;
     }
     .subtitle{
-      margin-top: 3px;
-    font-size: 18px;
-    line-height: 30px;
-    color: rgb(123, 128, 152);
-    }
+      font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+text-align: center;
+color: #746B92;
+margin-top:4px;
+
+}
+
+.create-wallet-btn{
+  margin-top:15px;
+}
+
+.already-have-account{
+  background: linear-gradient(89.78deg, rgba(36, 6, 226, 0.1) 0.19%, rgba(123, 53, 238, 0.1) 99.81%);
+border-radius: 12px;
+margin-top:16px;
+color: #4D20D9;
+font-weight: 600;
+font-size: 16px;
+line-height: 26px;
+text-align: center;
+}
 
     .menu-list{
       button{

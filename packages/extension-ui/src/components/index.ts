@@ -9,6 +9,8 @@ export { default as Switch } from './controls/Switch';
 
 export { default as Tabs } from './tabs';
 export { default as Dialog } from './common/Dialog';
+export { default as Sidebar } from './Sidebar';
+export { default as Header } from './Header';
 export { default as Loader } from './Loader';
 export { default as ScreenLoader } from './ScreenLoader';
 

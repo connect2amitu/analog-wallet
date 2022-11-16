@@ -24,8 +24,9 @@ export default styled(Main)(({ theme }: ThemeProps) => `
   color: ${theme.textColor};
   font-size: ${theme.fontSize};
   line-height: ${theme.lineHeight};
-  border: 1px solid ${theme.inputBorderColor};
-  overflow:auto;
+  overflow:hidden;
+  width: 460px;
+  margin: 0 auto;
 
   * {
     font-family: ${theme.fontFamily};

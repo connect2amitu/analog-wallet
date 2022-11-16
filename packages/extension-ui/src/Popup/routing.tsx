@@ -9,14 +9,10 @@ const Welcome = lazy(() => import('./Welcome'));
 const ImportPrivateKey = lazy(() => import('./ImportPrivateKey'));
 
 const router = createHashRouter([
-  {
-    path: '/',
-    element: <Components />,
-  },
-  {
-    path: '/welcome',
-    element: <Welcome />,
-  },
+  // {
+  //   path: '/',
+  //   element: <Welcome />,
+  // },
   {
     path: '/account/create',
     element: <NewAccount />
@@ -32,6 +28,10 @@ const router = createHashRouter([
   {
     path: '/account/restore-json',
     element: <RestoreJson />,
+  },
+  {
+    path: '/',
+    element: <Components />,
   },
 ]);
 
