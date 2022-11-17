@@ -29,13 +29,29 @@ const validationSchema = Yup.object().shape({
   acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required')
 });
 
-
 const Wrapper = styled.div`
   overflow: auto;
   height: 100%;
 `
+
+const Drawer = styled.div<{ show: boolean }>`
+  border-radius: 20px 20px 0 0;
+  background: #18142b;
+  border: 1px solid rgba(245, 245, 255, 0.2);
+  border-radius: 16px 16px 0px 0px;
+  overflow: hidden;
+  position: fixed;
+  width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all .5s;
+  bottom: ${(props) => props.show ? "0" : "-100%"};
+  box-shadow: 0px -20px 20px 8px rgb(0 0 0 / 28%);
+`;
+
 const Components = ({ className }: { className: string }) => {
   const [step, setStep] = useState(0);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const [error, setError] = useState<{
     case: null | boolean;
@@ -66,8 +82,6 @@ const Components = ({ className }: { className: string }) => {
     reValidateMode: "onChange",
     resolver: yupResolver(validationSchema)
   });
-
-
 
   const checkStrength = (password: string) => {
     console.info('password=>', password);
@@ -126,10 +140,7 @@ const Components = ({ className }: { className: string }) => {
         <NavBar />
         <Wrapper>
 
-
           <TextBox type="password" label="Password" name="password" onChange={(value: string) => checkStrength(value)} />
-
-
 
           <div id="popover-password" style={{
             display: 'flex',
@@ -151,6 +162,7 @@ const Components = ({ className }: { className: string }) => {
           <Button variant="contained">Contained</Button>
           <Button variant="outlined">Outlined</Button>
           <Button variant="text">Text</Button>
+          <Button onClick={() => setOpenDrawer(true)}>Open Drawer</Button>
 
           <br />
           <Button onClick={() => {
@@ -308,9 +320,10 @@ const Components = ({ className }: { className: string }) => {
           </form>
 
           <Dialog onClose={() => {
+            // setOpenDrawer(false)
             console.info('onClose called=>');
           }}>
-            <Drawer>
+            <Drawer show={openDrawer} >
               <DrawerHeader>
                 title
               </DrawerHeader>
@@ -321,9 +334,10 @@ const Components = ({ className }: { className: string }) => {
 
               <DrawerFooter>
                 <div className='action-btn-wrap'>
-                  <Button>Cancel</Button>
+                  <Button onClick={() => setOpenDrawer(false)}>Cancel</Button>
                   <Button onClick={() => {
                     show("Hello")
+                    setOpenDrawer(false)
                   }}>Save</Button>
                 </div>
               </DrawerFooter>
@@ -339,21 +353,6 @@ const Components = ({ className }: { className: string }) => {
 };
 
 
-const Drawer = styled.div`
-  border-radius: 20px 20px 0 0;
-  background: #18142b;
-  border: 1px solid rgba(245, 245, 255, 0.2);
-  border-radius: 16px 16px 0px 0px;
-  overflow: hidden;
-
-  position: fixed;
-  bottom: -100%;
-  width: 460px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: all .5s;
-  /* bottom: 0; */
-`;
 
 const DrawerHeader = styled.div`
   width: 100%;

@@ -22,10 +22,10 @@ export default styled(Main)(({ theme }: ThemeProps) => `
   height: calc(100vh - 2px);
   background: ${theme.background};
   color: ${theme.textColor};
-  font-size: ${theme.fontSize};
+  /* font-size: ${theme.fontSize}; */
   line-height: ${theme.lineHeight};
   overflow:hidden;
-  width: 460px;
+  width: 400px;
   margin: 0 auto;
 
   * {

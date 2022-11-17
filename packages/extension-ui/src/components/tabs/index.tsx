@@ -28,14 +28,15 @@ display: flex;
 justify-content: center;
 
 .tab{
-  background: ${theme.secondaryColor};
+  opacity: 0.1;
+  background: ${theme.tabColor};
   border-radius: 10px;
   width: 40px;
   height: 6px;
   margin-left: 12px;
   cursor: pointer;
   &.active{
-    background: ${theme.primaryColor};
+    opacity: 1;
   }
 }
 `)

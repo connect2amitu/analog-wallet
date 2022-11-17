@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 
 import { ThemeProps } from '../../types';
-import Spinner from '../Spinner';
 
 interface Props extends ThemeProps {
   className?: string;
@@ -71,6 +70,8 @@ export default styled(Button)(({ isDanger, isDisabled, theme }: Props) => `
   padding: 0 21px;
   position: relative;
   text-align: center;
+  transition: all 0.5s;
+
 
   .children {
     font-family: ${theme.fontFamily};

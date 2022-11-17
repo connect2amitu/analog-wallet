@@ -11,7 +11,6 @@ const Welcome = ({ className }: { className: string }) => {
   const { t } = useTranslation();
   const navigate = useNavigate()
 
-
   const [step, setStep] = useState(1)
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const Welcome = ({ className }: { className: string }) => {
       setStep(2)
     }
   }, [])
-
 
   const openMenuList = () => {
     setStep(2)
@@ -38,8 +36,8 @@ const Welcome = ({ className }: { className: string }) => {
       />
       <span className="title">{t("Welcome Back")}</span>
       <span className="subtitle">{t("The decentralized web awaits")}</span>
-      <Button className="create-wallet-btn" onClick={() => openMenuList()} >{t("Create Wallet")}</Button>
-      <Button className="already-have-account" onClick={() => openMenuList()} >{t("I already have a wallet")}</Button>
+      <Button className="create-wallet-btn" onClick={() => goTo("/account/create")} >{t("Create Wallet")}</Button>
+      <Button className="already-have-account" onClick={() => goTo("/account/import-seed")} >{t("I already have a wallet")}</Button>
     </>
   }
 

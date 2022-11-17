@@ -5,43 +5,51 @@ import { get } from 'lodash'
 import { ThemeProps } from '../../types';
 
 interface Props {
-  label: string;
+  label: React.ReactNode | string;
   control?: any;
   errors?: any;
   name: string;
   className?: string;
-  value?: string;
-  onChange?: (val: string) => void | undefined;
+  value?: string | boolean;
+  onChange?: (val: boolean) => void;
 }
 
 const Checkbox = (props: Props) => {
-  const { label = "", name, control, errors, className, value = "", onChange } = props;
+  const { label = "", name, control, errors, className, value, onChange = () => { } } = props;
 
   return (
     <div className={className}>
       <label className={`${get(errors, `${name}.message`) ? "error" : ""}`}>
-        <Controller
-          render={({ field }) =>
-            <input {...field} type={"checkbox"}
-              checked={field.value}
-              onChange={(e) => field.onChange(e.target.checked)}
-            />}
-          name={name}
-          control={control}
-          defaultValue={false}
-        />
-        <span>{label}</span>
+        {
+          control ?
+
+            <Controller
+              render={({ field }) =>
+                <input {...field} type={"checkbox"}
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                />}
+              name={name}
+              control={control}
+              defaultValue={false}
+            /> : <input type={"checkbox"}
+              checked={Boolean(value)}
+              onChange={(e: any) => onChange(e.target.checked)}
+            />
+        }
+        <div className='label-error-text'>
+          <span>{label}</span>
+          {get(errors, `${name}.message`) && <span className='error-message'>
+            {get(errors, `${name}.message`, "")}
+          </span>}
+        </div>
       </label>
-      {get(errors, `${name}.message`) && <span className='error-message'>
-        {get(errors, `${name}.message`, "")}
-      </span>}
+
     </div>
   );
 };
 
 export default styled(Checkbox)(({ theme }: ThemeProps) => `
-margin: ${theme.boxMargin};
-
 label {
   display: flex;
   cursor: pointer;
@@ -93,7 +101,7 @@ input{
     }
 
     :checked{
-     background: #333333;
+     background: ${theme.primaryColor};
     }
   }
 &.error{
@@ -101,11 +109,15 @@ input{
     border-color: rgb(244, 67, 54);
   }
 }
+
+.label-error-text{
+  display:flex;
+flex-direction:column;
+}
 }
 
 .error-message{
   color: rgb(244, 67, 54);
-    padding-left: 19px;
     font-size: 12px;
   }
 `);

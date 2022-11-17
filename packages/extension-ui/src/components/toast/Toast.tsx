@@ -31,6 +31,7 @@ export default styled(Toast) <{ visible: boolean }>`
   padding: 12px;
   margin: auto;
   background: ${({ theme }: ThemeProps): string => theme.highlightedAreaBackground};
+  box-shadow: 0px 4px 30px rgb(15 0 64 / 10%);
   span{
     color: #333333;
     font-size: 14px;

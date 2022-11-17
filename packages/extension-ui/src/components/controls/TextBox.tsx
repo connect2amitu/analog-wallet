@@ -47,14 +47,13 @@ margin-top: 10px;
 
 .container{
   position: relative;
-  height: 50px;
-  padding: 0 12px;
-  border-radius: ${theme.borderRadius};
-  border:1px solid transparent;
-  background: rgba(51, 51, 51, 0.1);
-  /* background: transparent; */
-  color: rgba(255, 255, 255, 0.8);
-  width: auto;
+    height: 50px;
+    /* padding: 0 12px; */
+    border-radius: 12px;
+    border: 1px solid transparent;
+    /* background: rgba(51,51,51,0.1); */
+    color: rgba(255,255,255,0.8);
+    width: auto;
 
   &.error{
     border-color: rgb(244, 67, 54);
@@ -69,15 +68,16 @@ margin-top: 10px;
     width: 100%;
     bottom: 0px;
     height: 100%;
-    background: rgba(51, 51, 51, 0.1);
+    /* background: rgba(51,51,51,0.1); */
     color: #333333;
-    padding-left: 5px;
-    box-shadow: 0px 3px 30px rgba(15, 0, 64, 0.07);
+    padding-left: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(15, 0, 64, 0.08);
 
     &:focus,
     &:not(:placeholder-shown) {
       outline: none;
-      border-color: transparent;
+      /* border-color: transparent; */
       ~ label {
         //Come up with a calculation for this
         top: calc(30% - 12px);
