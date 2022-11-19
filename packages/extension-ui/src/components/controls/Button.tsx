@@ -70,7 +70,7 @@ export default styled(Button)(({ isDanger, isDisabled, theme }: Props) => `
   padding: 0 21px;
   position: relative;
   text-align: center;
-  transition: all 0.5s;
+  transition: all 0.2s;
 
 
   .children {

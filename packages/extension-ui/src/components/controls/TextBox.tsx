@@ -12,11 +12,25 @@ interface Props {
   type: "text" | "password";
   className?: string;
   value?: string;
+  info?: React.ReactNode;
   onChange?: (val: string) => void | undefined;
 }
 
+
+const InfoText = styled.div`
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: right;
+  color: #FFFFFF;
+  padding: 0 6px;
+`
 const TextBox = (props: Props) => {
-  const { label = "", name, control, errors, className, value = "", onChange, type = "text" } = props;
+  const { label = "", name, control, errors, className, value = "", onChange, type = "text", info } = props;
 
   return (
     <div className={className}>
@@ -31,6 +45,7 @@ const TextBox = (props: Props) => {
             /> : <input autoComplete="off" placeholder=" " name={name} defaultValue={value} type={type} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
         }
         <label className="field-placeholder" > {label} </label>
+        {info}
       </div>
       {get(errors, `${name}.message`) &&
         <span className='error-message'>

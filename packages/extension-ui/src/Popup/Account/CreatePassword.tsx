@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
@@ -16,8 +16,8 @@ interface Props {
 const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required('Password is required')
-    .min(6, 'Password must be at least 6 characters')
-    .max(40, 'Password must not exceed 40 characters'),
+    .min(3, 'Password must be at least 3 characters')
+    .max(10, 'Password must not exceed 10 characters'),
   confirmPassword: Yup.string()
     .required('Confirm Password is required')
     .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
@@ -47,17 +47,60 @@ const Container = styled.div`
   margin-top: 18px;
 `
 
+const TextContainer = styled.div`
+  position: relative;
+
+`
+
+const InfoText = styled.div<{ msgLevel: number }>`
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: ${props => (props.msgLevel === 0 ? `rgb(228, 8, 8)` : props.msgLevel === 1 ? `rgb(255, 216, 0)` : props.msgLevel === 2 ? `#00A775` : `rgb(14, 75, 5)`)};;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: right;
+  color: #FFFFFF;
+  padding: 0 6px;
+`
+
+const ERROR_MESSAGE = ["Weak", "Good", "Strong"]
+
+
 const CreatePassword = ({ onChange, className }: Props) => {
 
   const { t } = useTranslation();
   const [agree, setAgree] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
 
 
-  const { reset, handleSubmit, formState: { errors, isDirty, isValid }, control } = useForm({
+  const { reset, watch, handleSubmit, formState: { errors, isDirty, isValid }, control, getValues } = useForm({
     mode: "all",
     reValidateMode: "onChange",
     resolver: yupResolver(validationSchema)
   });
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      if (name === "password") {
+        let passwordStrength = 0
+
+        if (value.password.length >= 0 && value.password.length < 6) {
+          passwordStrength = 0;
+        } else if (value.password.length >= 6 && value.password.length < 12) {
+          passwordStrength = 1;
+        } else if (value.password.length >= 12) {
+          passwordStrength = 2;
+        }
+
+        setPasswordStrength(passwordStrength)
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch])
+
 
   return (
     <div className={className}>
@@ -72,8 +115,21 @@ const CreatePassword = ({ onChange, className }: Props) => {
         })} className="form">
 
           <div>
-            <TextBox className='textbox' type="password" label="Password" name="password" control={control} errors={errors} />
-            <TextBox className='textbox' type="password" label="Confirm Password" name="confirmPassword" control={control} errors={errors} />
+            <TextContainer>
+              <TextBox
+                className='textbox'
+                type="password"
+                label="Password"
+                name="password"
+                info={passwordStrength > 0 && <InfoText msgLevel={passwordStrength}>{`${ERROR_MESSAGE[passwordStrength]} Password!`}</InfoText>}
+                control={control}
+                errors={errors}
+              />
+            </TextContainer>
+
+            <TextContainer>
+              <TextBox className='textbox' type="password" label="Confirm Password" name="confirmPassword" control={control} errors={errors} />
+            </TextContainer>
 
             <div className='item'>
               <Checkbox name="acceptTerms" value={agree} label={<div className='agree-text'>I agree to the <span className='link'>Terms of Service</span></div>} control={control} errors={errors} onChange={setAgree} />

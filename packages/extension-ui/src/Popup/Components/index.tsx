@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import styled, { ThemeContext } from "styled-components";
 import * as Yup from 'yup';
 
-import { Button, Checkbox, Dialog, Header, Loader, NextStepButton, Switch, Tabs, TextBox, ThemeSwitchContext } from "../../components";
+import { Button, Checkbox, Dialog, Loader, NextStepButton, Switch, Tabs, TextBox, ThemeSwitchContext } from "../../components";
 import Container from "../../components/common/Container";
 import { getLogoByNetworkKey, toShortAddress } from "../../shared/functions";
 
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 
 const Drawer = styled.div<{ show: boolean }>`
   border-radius: 20px 20px 0 0;
-  background: #18142b;
+  background: #ffffff;
   border: 1px solid rgba(245, 245, 255, 0.2);
   border-radius: 16px 16px 0px 0px;
   overflow: hidden;
@@ -49,7 +49,7 @@ const Drawer = styled.div<{ show: boolean }>`
   box-shadow: 0px -20px 20px 8px rgb(0 0 0 / 28%);
 `;
 
-const Components = ({ className }: { className: string }) => {
+const Components = ({ className }: { className?: string }) => {
   const [step, setStep] = useState(0);
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -66,6 +66,8 @@ const Components = ({ className }: { className: string }) => {
     limit: null,
     strength: 0
   })
+
+
 
   const setTheme = useContext(ThemeSwitchContext);
   const themeContext = useContext(ThemeContext as React.Context<Theme>);
@@ -139,7 +141,6 @@ const Components = ({ className }: { className: string }) => {
       <Container>
         <NavBar />
         <Wrapper>
-
           <TextBox type="password" label="Password" name="password" onChange={(value: string) => checkStrength(value)} />
 
           <div id="popover-password" style={{
@@ -319,11 +320,10 @@ const Components = ({ className }: { className: string }) => {
 
           </form>
 
-          <Dialog onClose={() => {
-            // setOpenDrawer(false)
-            console.info('onClose called=>');
+          <Dialog open={openDrawer} onClose={() => {
+            setOpenDrawer(false)
           }}>
-            <Drawer show={openDrawer} >
+            <Drawer show={openDrawer}>
               <DrawerHeader>
                 title
               </DrawerHeader>
@@ -333,12 +333,16 @@ const Components = ({ className }: { className: string }) => {
               </DrawerBody>
 
               <DrawerFooter>
-                <div className='action-btn-wrap'>
-                  <Button onClick={() => setOpenDrawer(false)}>Cancel</Button>
+                <div style={{
+                  flex: '1 1 50%',
+                  display: 'flex',
+                  gap: '15px'
+                }}>
                   <Button onClick={() => {
                     show("Hello")
                     setOpenDrawer(false)
                   }}>Save</Button>
+                  <Button variant="outlined" onClick={() => setOpenDrawer(false)}>Cancel</Button>
                 </div>
               </DrawerFooter>
             </Drawer>
@@ -373,6 +377,8 @@ export default styled(Components)(({ theme }: ThemeProps) => `
     margin-top: 20px;
     display: flex;
     margin-top: 20px;
+    flex: 1 1 50%;
+
 
     .action-btn{
       margin-right: 8px;

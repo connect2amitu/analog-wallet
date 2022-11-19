@@ -1,0 +1,90 @@
+
+import { ActionContext, Container, Header, ScreenLoader, Tabs } from '../../../components';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import SecretRecoveryPhrase from '../SecretRecoveryPhrase';
+import VerifyPhrase from '../VerifyPhrase';
+import CreatePassword from '../CreatePassword';
+import YouAreAllDone from './YouAreAllDone';
+
+
+interface Props {
+  className?: string;
+}
+
+function CreateAccount({ className }: Props): React.ReactElement {
+  const onAction = useContext(ActionContext);
+  const [isBusy, setIsBusy] = useState(false);
+  const [step, setStep] = useState<number>(1);
+  const [seed, setSeed] = useState<null | string>(null);
+  const isFirefox = window.localStorage.getItem('browserInfo') === 'Firefox';
+  const isLinux = window.localStorage.getItem('osInfo') === 'Linux';
+
+  if (isFirefox || isLinux) {
+    window.localStorage.setItem('popupNavigation', '');
+  }
+
+  useEffect((): void => {
+    const lastStep = Number(localStorage.getItem("step")) || 1;
+    console.info('lastStep=>', typeof lastStep);
+    setStep(lastStep)
+    setSeed("physical undo offer dumb hawk fruit harsh main poem bounce ginger owner")
+  }, []);
+
+  useEffect((): void => {
+    localStorage.setItem("step", String(step))
+  }, [step]);
+
+  const onCreate = useCallback(
+    (): void => {
+      // this should always be the case
+      setIsBusy(true);
+      setTimeout(() => {
+        setIsBusy(false);
+        window.localStorage.setItem('popupNavigation', '/');
+        onAction('/');
+      }, 2000);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [onAction]
+  );
+
+  const onNextStep = () => {
+    setStep((step) => step + 1)
+  }
+
+  const onPreviousStep = () => {
+    setStep((step) => step >= 2 ? step - 1 : step)
+  }
+
+  const RenderComponent = () => {
+    switch (step) {
+      case 1:
+        return <SecretRecoveryPhrase onChange={onNextStep} />
+      case 2:
+        return <VerifyPhrase onChange={onNextStep} />
+      case 3:
+        return <CreatePassword onChange={onNextStep} />
+      case 4:
+        return <YouAreAllDone onChange={() => { onCreate() }} />
+      default:
+        return <></>
+    }
+  }
+
+
+  return (
+    <Container className={className}>
+      {isBusy ?
+        <ScreenLoader /> : <>
+          <Header title={<Tabs limit={3} value={step} />} onBack={onPreviousStep} />
+          <RenderComponent />
+        </>
+      }
+    </Container>
+  );
+}
+
+export default styled(CreateAccount)`
+  padding:32px
+`;

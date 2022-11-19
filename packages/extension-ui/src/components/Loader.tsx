@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LoaderIcon from '../assets/icons/loader.svg';
+import LoaderIcon from '../assets/icons/circular-loader.png';
 
 const Loader = styled.img`
   animation-name: spin;
@@ -18,17 +18,17 @@ const Loader = styled.img`
   }
 `;
 
-const LoaderComponent = ({ height = 15, width = 15 }) => {
+const LoaderComponent = ({ height = 15, width = 15, show = false, className = "" }) => {
   return (
-    <div>
-      <Loader
+    <>
+      {show && <Loader
+        className={`loading-icon ${className}`}
         src={LoaderIcon}
         alt="loading"
-        className="loading-icon"
         height={height}
         width={width}
-      />
-    </div>
+      />}
+    </>
   );
 };
 

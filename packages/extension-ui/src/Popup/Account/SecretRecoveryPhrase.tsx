@@ -20,6 +20,7 @@ border-radius: 8px;
 padding: 6px 9.9px;
 flex: 1 1 30%;
 cursor: pointer;
+user-select: none;
 
 span{
   font-weight: 500;
@@ -94,7 +95,7 @@ const SecretRecoveryPhrase = ({ onChange, className }: Props) => {
 
   const onDownloadHandler = () => {
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(mnemonic);
-    const fileName = `mnemonic.txt`;
+    const fileName = `mnemonic-seed.json`;
     const downloadAnchorNode = document.createElement('a');
 
     if (downloadAnchorNode) {

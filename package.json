@@ -12,7 +12,7 @@
 		"build:extra": "yarn build:i18n && yarn build:ui",
 		"build:ui": "cd packages/extension && yarn webpack --config webpack.extension.cjs --mode production",
 		"build:i18n": "i18next-scanner --config i18next-scanner.config.js",
-		"watch": "cd packages/extension && yarn webpack --config webpack.watch.cjs --mode development --watch"
+		"watch": "cd packages/extension && yarn webpack --config webpack.watch.cjs --mode development --watch -d inline-source-map"
 	},
 	"author": "",
 	"license": "ISC",

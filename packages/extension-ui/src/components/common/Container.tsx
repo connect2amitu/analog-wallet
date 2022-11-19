@@ -11,6 +11,6 @@ const Container = ({ className, children }: { className?: string; children: any 
 
 export default styled(Container)`
   position: relative;
-  padding: 15px 17px;
+  padding: 16px;
   height: 100vh;
 `

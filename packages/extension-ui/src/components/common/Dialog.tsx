@@ -1,14 +1,23 @@
-import React from 'react';
-import ClickAwayListener from 'react-click-away-listener';
 import ReactDOM from 'react-dom';
+import React, { useRef } from 'react';
+
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 interface Props {
   children: React.ReactElement;
-  onClose: () => void | undefined;
+  onClose: (val: boolean) => void | undefined;
   className?: string;
   element?: string
+  open?: boolean
 }
-const Dialog = ({ children, onClose, className = 'root-portal', element = 'div' }: Props) => {
+const Dialog = ({ children, open = false, onClose, className = 'root-portal', element = 'div' }: Props) => {
+
+  const actionsRef = useRef(null);
+
+  useOutsideClick(actionsRef, (): void => {
+    open && onClose(!open);
+  });
+
   const el = document.createElement(element);
   el.classList.add(className);
 
@@ -22,7 +31,7 @@ const Dialog = ({ children, onClose, className = 'root-portal', element = 'div' 
   }, [container]);
 
   return ReactDOM.createPortal(
-    <ClickAwayListener onClickAway={onClose}>{children}</ClickAwayListener>,
+    <div ref={actionsRef}>{children}</div>,
     container
   );
 };

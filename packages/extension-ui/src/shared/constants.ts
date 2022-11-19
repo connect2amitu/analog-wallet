@@ -1,4 +1,4 @@
-export const TEST = 'Testing string from extension-ui workspace';
+export const MEMONIC = 'script planet solve cluster tumble pretty mouse already famous tide kiwi welcome';
 
 
 export const SCREEN_SIZE = {

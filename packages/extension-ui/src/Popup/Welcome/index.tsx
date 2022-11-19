@@ -1,32 +1,46 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import * as Bowser from 'bowser';
 
-import { Button } from "../../components";
-import { useEffect, useState } from "react";
+import { ActionContext, Button } from "../../components";
 import SpiralSphereIcon from "../../assets/icons/spiralsphere.svg";
+import { useContext, useEffect } from "react";
 
-import { useNavigate } from "react-router";
 
-const Welcome = ({ className }: { className: string }) => {
+const Welcome = ({ className }: { className?: string }) => {
+
   const { t } = useTranslation();
-  const navigate = useNavigate()
+  const browser = Bowser.getParser(window.navigator.userAgent);
+  const onAction = useContext(ActionContext);
 
-  const [step, setStep] = useState(1)
 
-  useEffect(() => {
-    const isRead = localStorage.getItem("welcome_read")
-    if (isRead) {
-      setStep(2)
-    }
-  }, [])
 
-  const openMenuList = () => {
-    setStep(2)
-    localStorage.setItem("welcome_read", "ok")
+  console.info('browser.getBrowser() 2 =>', browser.getBrowser());
+  if (!!browser.getBrowser() && !!browser.getBrowser().name && !!browser.getOS().name) {
+    window.localStorage.setItem('browserInfo', browser.getBrowser().name as string);
+    window.localStorage.setItem('osInfo', browser.getOS().name as string);
   }
 
-  const WelcomeScreen = () => {
-    return <>
+
+  useEffect(() => {
+    const isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
+    console.info('isWelcomeDone=>', isWelcomeDone);
+
+    if (isWelcomeDone) {
+      onAction("/")
+    }
+
+  }, [])
+
+
+
+  const goTo = (path: string) => {
+    localStorage.setItem("welcome_read", "ok")
+    onAction(path)
+  }
+
+  return (
+    <div className={className}>
       <img
         className='icon'
         src={SpiralSphereIcon}
@@ -38,45 +52,11 @@ const Welcome = ({ className }: { className: string }) => {
       <span className="subtitle">{t("The decentralized web awaits")}</span>
       <Button className="create-wallet-btn" onClick={() => goTo("/account/create")} >{t("Create Wallet")}</Button>
       <Button className="already-have-account" onClick={() => goTo("/account/import-seed")} >{t("I already have a wallet")}</Button>
-    </>
-  }
-
-  const goTo = (path: string) => {
-    console.info('goTo path=>', path);
-    navigate(path)
-  }
-
-  const MenuScreen = () => {
-    return <div className="menu-list">
-      <Button onClick={() => goTo("/account/create")} >{t("Create new account")}</Button>
-      <Button onClick={() => goTo("/account/import-seed")} >{t("Import account from pre-existing seed")}</Button>
-      <Button onClick={() => goTo("/account/import-metamask-private-key")} >{t("Import private key from MetaMask")}</Button>
-      <Button onClick={() => goTo("/account/restore-json")} >{t("Restore account from JSON backup file")}</Button>
-    </div>
-  }
-
-  const RenderComponent = () => {
-    switch (step) {
-      case 1:
-        return <WelcomeScreen />
-      case 2:
-        return <MenuScreen />
-      default:
-        return <></>
-    }
-  }
-
-  return (
-    <div className={className}>
-      <div className="container">
-        <RenderComponent />
-      </div>
     </div>
   );
 };
 
 export default styled(Welcome)`
-.container{
   display: flex;
     flex-direction: column;
     -webkit-box-align: center;
@@ -113,13 +93,5 @@ font-weight: 600;
 font-size: 16px;
 line-height: 26px;
 text-align: center;
-}
-
-    .menu-list{
-      button{
-        margin-bottom: 10px;
-        border-radius: 40px;
-      }
-    }
 }
 `

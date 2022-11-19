@@ -69,6 +69,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 transition: all 0.3s;
+user-select: none;
 
 span{
   font-weight: 500;

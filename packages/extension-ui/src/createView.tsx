@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import { HashRouter } from 'react-router-dom';
+
 import View from './components/View';
 
 export default function createView(Entry: React.ComponentType, rootId = 'root'): void {
@@ -14,11 +16,14 @@ export default function createView(Entry: React.ComponentType, rootId = 'root'):
   );
 
   root.render(
-    <React.StrictMode>
+    <Suspense fallback='...'>
       <View>
-        <Entry />
+        <HashRouter>
+          <Entry />
+        </HashRouter>
       </View>
-    </React.StrictMode>);
+    </Suspense>,
+  );
 }
 
 

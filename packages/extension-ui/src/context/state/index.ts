@@ -1,7 +1,7 @@
-import useCounter from './useCounter';
+import useAction from './useAction';
 
 const containers = {
-  counter: useCounter
+  action: useAction,
 };
 
 export default containers
