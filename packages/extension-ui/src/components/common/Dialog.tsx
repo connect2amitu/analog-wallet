@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { useRef } from 'react';
 
 import useOutsideClick from '../../hooks/useOutsideClick';
+import styled from 'styled-components';
 
 interface Props {
   children: React.ReactElement;
@@ -10,6 +11,23 @@ interface Props {
   element?: string
   open?: boolean
 }
+
+
+const Drawer = styled.div<{ show: boolean }>`
+  border-radius: 20px 20px 0 0;
+  background: #ffffff;
+  border: 1px solid rgba(245, 245, 255, 0.2);
+  border-radius: 16px 16px 0px 0px;
+  overflow: hidden;
+  position: fixed;
+  width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all .5s;
+  bottom: ${(props) => props.show ? "0" : "-100%"};
+  box-shadow: 0px 5px 31px -2px rgb(0 0 0 / 28%);
+`;
+
 const Dialog = ({ children, open = false, onClose, className = 'root-portal', element = 'div' }: Props) => {
 
   const actionsRef = useRef(null);
@@ -31,7 +49,7 @@ const Dialog = ({ children, open = false, onClose, className = 'root-portal', el
   }, [container]);
 
   return ReactDOM.createPortal(
-    <div ref={actionsRef}>{children}</div>,
+    <Drawer show={open}><div ref={actionsRef}>{children}</div></Drawer>,
     container
   );
 };

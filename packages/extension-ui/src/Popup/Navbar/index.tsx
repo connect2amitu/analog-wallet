@@ -1,16 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { Header, Sidebar, Theme } from "../../components";
+import { Header, Sidebar } from "../../components";
 
 import HamburgerIcon from "../../assets/icons/hamburger.svg";
 import ActivityIcon from "../../assets/icons/activity.svg";
-import BackIcon from "../../assets/icons/back.svg";
 import NoActivityIcon from "../../assets/icons/no-activity.svg";
-
-interface ThemeProps {
-  theme: Theme;
-}
 
 interface Props {
   className?: string;
@@ -52,68 +47,64 @@ const NavBar = (props: Props) => {
           alt="icon"
         />
       </div>
-      <div>
+      <Sidebar open={openMenubar}>
+        <Header title="Settings" subTitle="" onBack={() => { setOpenMenubar(false) }} />
 
-        <Sidebar open={openMenubar}>
-          <Header title="Settings" subTitle="" onBack={() => { setOpenMenubar(false) }} />
+      </Sidebar>
 
-        </Sidebar>
+      <Sidebar open={openActivity}>
+        <Header title="Activity" subTitle="" onBack={() => { setOpenActivity(false) }} />
+        <div className="activity-container">
+          <img
 
-        <Sidebar open={openActivity}>
-          <Header title="Activity" subTitle="" onBack={() => { setOpenActivity(false) }} />
-          <div className="activity-container">
-            <img
-
-              onClick={() => setOpenMenubar(false)}
-              className='no-activity-icon'
-              src={NoActivityIcon}
-              height={20}
-              width={20}
-              alt="icon"
-            />
-            <h1 className="title">No activity yet</h1>
-            <span className="sub-title">Your activities will show up here </span>
-          </div>
-        </Sidebar>
-      </div>
+            onClick={() => setOpenMenubar(false)}
+            className='no-activity-icon'
+            src={NoActivityIcon}
+            height={20}
+            width={20}
+            alt="icon"
+          />
+          <h1 className="title">No activity yet</h1>
+          <span className="sub-title">Your activities will show up here </span>
+        </div>
+      </Sidebar>
     </div>
   );
 };
 
-export default styled(NavBar)(({ theme }: ThemeProps) => `
-height: 42px;
+export default styled(NavBar)`
 .container{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .activity-container{
   height: calc(100vh - 80px);
   display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-.no-activity-icon{
-  width: 165px;
-height: 164.61px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .no-activity-icon{
+    width: 165px;
+    height: 164.61px;
+  }
+  .title{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    color: #0F0040;
+    margin-top: 17px;
+    margin-bottom: 0;
+  }
+  .sub-title{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #746B92;
+    margin-top: 6px;
+  }
 }
-    .title{
-      font-weight: 700;
-font-size: 24px;
-line-height: 36px;
-text-align: center;
-color: #0F0040;
-margin-top: 17px;
-margin-bottom: 0;
-    }
-    .sub-title{
-      font-weight: 400;
-font-size: 14px;
-line-height: 20px;
-text-align: center;
-color: #746B92;
-margin-top: 6px;
-
-    }
-}
-`)
+`

@@ -1,4 +1,4 @@
-import React, { lazy, useState, useCallback } from 'react';
+import React, { lazy, useCallback } from 'react';
 import { Route, Switch } from 'react-router';
 
 import { ErrorBoundary, LoadingContainer, ActionContext } from '../components';
@@ -11,13 +11,9 @@ const Lock = lazy(() => import('./Lock'));
 const Welcome = lazy(() => import('./Welcome'));
 
 const Popup = () => {
-  const [isWelcomeDone, setWelcomeDone] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
 
   const _onAction = useCallback(
     (to?: string): void => {
-      setWelcomeDone(window.localStorage.getItem('welcome_read') === 'ok');
-      setIsLogin(window.localStorage.getItem('auth') === 'true');
 
       if (to) {
         window.location.hash = to;
@@ -29,6 +25,10 @@ const Popup = () => {
   function wrapWithErrorBoundary(component: React.ReactElement, trigger?: string): React.ReactElement {
     return <ErrorBoundary trigger={trigger}>{component}</ErrorBoundary>;
   }
+
+  const isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
+  const isLogin = window.localStorage.getItem('auth') === 'true';
+
 
   const Root = isWelcomeDone && isLogin
     ? wrapWithErrorBoundary(<Home />, 'Home')

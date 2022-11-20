@@ -2,8 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ThemeProps } from '@analog/extension-ui/types';
-
 interface Props {
   content: React.ReactChild;
   className?: string;
@@ -25,13 +23,12 @@ export default styled(Toast) <{ visible: boolean }>`
   line-height: 7px;
   top: 69px;
   left: calc(50% - 50px);
-  color: #0E0A0A;
   background: #FFFFFF;
+  color: #0F0040;
   border-radius: 6px;
   padding: 12px;
   margin: auto;
-  background: ${({ theme }: ThemeProps): string => theme.highlightedAreaBackground};
-  box-shadow: 0px 4px 30px rgb(15 0 64 / 10%);
+  box-shadow: 0 0 20px 6px rgb(15 0 64 / 10%);
   span{
     color: #333333;
     font-size: 14px;

@@ -7,7 +7,6 @@ interface ToastProviderProps {
   children?: React.ReactNode;
 }
 
-
 const TOAST_TIMEOUT = 2000;
 
 const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<ToastProviderProps> => {
@@ -28,10 +27,7 @@ const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<Toa
   return (
     <ToastContext.Provider value={{ show }}>
       {children}
-      <Toast
-        content={content}
-        visible={visible}
-      />
+      <Toast content={content} visible={visible} />
     </ToastContext.Provider>
   );
 };
@@ -39,7 +35,6 @@ const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<Toa
 export default ToastProvider;
 
 ToastProvider.displayName = 'Toast';
-
 
 export function useToast(): { show: (message: string) => void } {
   return useContext(ToastContext);

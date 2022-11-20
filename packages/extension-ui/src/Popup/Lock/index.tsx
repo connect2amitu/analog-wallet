@@ -17,17 +17,14 @@ const validationSchema = Yup.object().shape({
 });
 
 const Link = styled.p`
-  margin-top: 19px;
+  margin-top: 11px;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  background: linear-gradient(89.78deg, #2406E2 0.19%, #7B35EE 99.81%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   text-align: center;
   cursor: pointer;
   user-select: none;
+  color: #4D20D9;
   `
 
 const Lock = ({ className }: { className?: string }) => {
@@ -79,11 +76,11 @@ const Lock = ({ className }: { className?: string }) => {
           errors={errors}
         />
 
-        <Link onClick={onForgotPassword}>{t("Forgot password")}</Link>
-
         <Button isBusy={isBusy} className='unlock-btn' isDisabled={!isDirty || !isValid} type="submit"> {t("Unlock")}</Button>
 
       </form>
+
+      <Link onClick={onForgotPassword}>{t("Forgot password")}</Link>
 
     </div>
   );
