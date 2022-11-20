@@ -1,4 +1,4 @@
-import { ActionContext, Container, Header, Tabs } from '../../../components'
+import { ActionContext, Container, Header, Loader, Tabs } from '../../../components'
 import React, { useCallback, useContext, useState } from 'react'
 import CreatePassword from '../CreatePassword';
 import SecretRecoveryPhrase from './SecretRecoveryPhrase';
@@ -24,9 +24,13 @@ const ImportSeed = ({ className }: { className?: string }) => {
 
   const onImport = useCallback(
     (): void => {
-      setIsBusy(false);
-      window.localStorage.setItem('popupNavigation', '/');
-      onAction('/');
+      setIsBusy(true);
+
+      setTimeout(() => {
+        setIsBusy(false);
+        window.localStorage.setItem('popupNavigation', '/');
+        onAction('/');
+      }, 1000);
     },
     [onAction]
   );
@@ -49,12 +53,16 @@ const ImportSeed = ({ className }: { className?: string }) => {
 
   return (
     <Container className={className}>
-      <Header title={<Tabs limit={3} value={step} />} onBack={onPreviousStep} />
-      <RenderComponent />
+      {isBusy ?
+        <Loader full={true} show={isBusy} height={65} width={65} /> : <>
+          <Header title={<Tabs limit={3} value={step} />} onBack={onPreviousStep} />
+          <RenderComponent />
+        </>
+      }
     </Container>
   )
 }
 
 export default styled(ImportSeed)`
-    padding:32px
+  padding:32px
 `

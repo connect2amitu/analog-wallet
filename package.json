@@ -9,8 +9,8 @@
 	],
 	"scripts": {
 		"start": "yarn watch",
-		"build:extra": "yarn build:i18n && yarn build:ui",
-		"build:ui": "cd packages/extension && yarn webpack --config webpack.extension.cjs --mode production",
+		"build": "yarn build:i18n && yarn build:ui",
+		"build:ui": "cd packages/extension && yarn webpack --config webpack.extension.cjs --mode production -d inline-source-map",
 		"build:i18n": "i18next-scanner --config i18next-scanner.config.js",
 		"watch": "cd packages/extension && yarn webpack --config webpack.watch.cjs --mode development --watch -d inline-source-map"
 	},

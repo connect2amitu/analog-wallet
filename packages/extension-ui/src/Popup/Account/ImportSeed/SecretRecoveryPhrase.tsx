@@ -91,7 +91,7 @@ const Link = styled.p`
 
 const Phrase = ({ className, index, value, onChange }: { className?: string, index: number, value: string, onChange: (val: string) => void }) =>
   <Chip className={className} htmlFor={`seed-${index}`}>
-    <span> {index}. </span> <input className='textbox' id={`seed-${index}`} onChange={(e: any) => onChange(e.target.value)} value={value} type={"text"} />
+    <span> {index}. </span> <input autoComplete='off' className='textbox' id={`seed-${index}`} onChange={(e: any) => onChange(e.target.value)} value={value} type={"text"} />
   </Chip >
 
 const VALID_PHRASE_LENGTH = [12, 24]

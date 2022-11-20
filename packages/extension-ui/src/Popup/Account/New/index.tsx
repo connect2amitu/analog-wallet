@@ -1,12 +1,11 @@
 
-import { ActionContext, Container, Header, ScreenLoader, Tabs } from '../../../components';
+import { ActionContext, Container, Header, Loader, LoadingContainer, Tabs } from '../../../components';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SecretRecoveryPhrase from '../SecretRecoveryPhrase';
 import VerifyPhrase from '../VerifyPhrase';
 import CreatePassword from '../CreatePassword';
 import YouAreAllDone from './YouAreAllDone';
-
 
 interface Props {
   className?: string;
@@ -54,7 +53,11 @@ function CreateAccount({ className }: Props): React.ReactElement {
   }
 
   const onPreviousStep = () => {
-    setStep((step) => step >= 2 ? step - 1 : step)
+    if (step >= 2) {
+      setStep((step) => step >= 2 ? step - 1 : step)
+    } else {
+      onAction('/');
+    }
   }
 
   const RenderComponent = () => {
@@ -72,11 +75,10 @@ function CreateAccount({ className }: Props): React.ReactElement {
     }
   }
 
-
   return (
     <Container className={className}>
       {isBusy ?
-        <ScreenLoader /> : <>
+        <Loader full={true} show={isBusy} height={65} width={65} /> : <>
           <Header title={<Tabs limit={3} value={step} />} onBack={onPreviousStep} />
           <RenderComponent />
         </>
@@ -86,5 +88,5 @@ function CreateAccount({ className }: Props): React.ReactElement {
 }
 
 export default styled(CreateAccount)`
-  padding:32px
+  padding:32px;
 `;

@@ -10,7 +10,7 @@ interface Props {
 function LoadingContainer({ children, className }: Props): React.ReactElement<Props> {
   if (!children) {
     return (
-      <LoaderComponent className={className} />
+      <LoaderComponent show={true} className={className} />
     );
   }
 

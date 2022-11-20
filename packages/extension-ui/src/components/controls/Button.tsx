@@ -49,7 +49,7 @@ const Button = ({ children, className = '', isBusy, isDisabled, onClick, to, typ
       disabled={isDisabled || isBusy}
       onClick={onClickHandler}
     >
-      <div className='children'>{children}</div>
+      <div className='children'>{isBusy ? "Loading..." : children}</div>
     </button>
   );
 }
