@@ -7,6 +7,8 @@ import { Dialog } from '../../components';
 import CopyIcon from "../../assets/icons/copy-gradient.svg";
 import OpenIcon from "../../assets/icons/open-icon.svg";
 import CloseIcon from "../../assets/icons/close.svg";
+import WalletOneIcon from "../../assets/icons/wallet-1.svg";
+import WalletTwoIcon from "../../assets/icons/wallet-2.svg";
 
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
 const Image = styled.img`
   width: ${(props: any) => (props.width ? `${props.width}px` : '19.64px')};
   height: ${(props: any) => (props.height ? `${props.height}px` : '19.64px')};
+  cursor:pointer;
 `;
 
 const Heading = styled.div`
@@ -30,9 +33,9 @@ const Heading = styled.div`
 const Container = styled.div`
   margin-top: 11px;
   max-height: 250px;
-  min-height: 200px;
+  min-height: 160px;
   overflow: auto;
-  padding: 8px 15px;
+  padding: 8px 16px;
 `;
 
 const Title = styled.div`
@@ -46,21 +49,73 @@ const CloseButton = styled.div`
   position: absolute;
   right: 16px;
   top: 8px;
-  cursor: pointer;
 `;
 
 
+const WalletCard = styled.div`
+  background: #FFFFFF;
+  box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
+  border-radius: 12px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+
+  .wallet-detail-wrapper{
+    display: flex;
+    align-items: center;
+    .detail{
+      margin-left: 9px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .title{
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: #0F0040;
+      }
+
+      .address{
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        color: #9A97A6;
+      }
+    }
+  }
+
+  :first-of-type{
+    margin-top: 0;
+  }
+`
+
+const DUMMY_ACCOUNTS = [
+  {
+    title: "Wallet 1",
+    icon: WalletOneIcon,
+    type: "",
+    address: "DokDL115tg78Fr...15tg78Fr"
+  }, {
+    title: "Wallet 2",
+    icon: WalletTwoIcon,
+    type: "",
+    address: "DokDL115tg78Fr...15tg78Fr"
+  }
+]
 
 const WalletSelector = ({ className }: Props) => {
   const { t } = useTranslation();
-  const [openDrawer, setOpenDrawer] = useState(true);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
     <div className={className}>
       <div className='box'>
         <div className='address-status'>
           <div className='dot' />
-          <div className='selected-wallet'><span>My Universal Wallet 1 </span></div>
+          <div className='selected-wallet'><p>My Universal Wallet 1 </p></div>
         </div>
         <div className='action-btn-wrap'>
           <div className='btn'>
@@ -82,12 +137,23 @@ const WalletSelector = ({ className }: Props) => {
             </CloseButton>
           </Heading>
           <Container>
-            <h1>drawer</h1>
-            <h1>drawer</h1>
-            <h1>drawer</h1>
-            <h1>drawer</h1>
-            <h1>drawer</h1>
-            <h1>drawer</h1>
+
+            {
+              DUMMY_ACCOUNTS.map(({ title, icon, address }, index) =>
+                <WalletCard key={index}>
+                  <div className='wallet-detail-wrapper'>
+                    <div>
+                      <Image src={icon} alt="cross-icon" height={32} width={32} />
+                    </div>
+                    <div className='detail'>
+                      <p className='title'>{title}</p>
+                      <p className='address'>{address}</p>
+                    </div>
+                  </div>
+                  <Image src={CopyIcon} alt="cross-icon" height={16} width={16} />
+                </WalletCard>
+              )
+            }
           </Container>
         </>
       </Dialog>
@@ -108,7 +174,6 @@ export default styled(WalletSelector)`
     box-shadow: 0px 4px 9px rgba(241, 231, 255, 0.5);
     border-radius: 8px;
     height: 30px;
-    /* padding: 9px 5px 9px 8px; */
     padding: 9px;
     display: flex;
     align-items: center;
@@ -125,12 +190,16 @@ export default styled(WalletSelector)`
       }
     .selected-wallet{
       margin-left: 7px;
-      span{
+      p{
         font-weight: 500;
         font-size: 12px;
         line-height: 18px;
         text-align: center;
         color: #0F0040;
+        width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -150,6 +219,7 @@ export default styled(WalletSelector)`
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
         
         &.open-link{
           margin-left: 4px;
