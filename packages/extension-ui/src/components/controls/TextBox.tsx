@@ -16,19 +16,6 @@ interface Props {
   onChange?: (val: string) => void | undefined;
 }
 
-
-const InfoText = styled.div`
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 5px;
-  font-size: 12px;
-  line-height: 18px;
-  text-align: right;
-  color: #FFFFFF;
-  padding: 0 6px;
-`
 const TextBox = (props: Props) => {
   const { label = "", name, control, errors, className, value = "", onChange, type = "text", info } = props;
 

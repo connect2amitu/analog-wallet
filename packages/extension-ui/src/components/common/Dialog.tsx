@@ -10,25 +10,25 @@ interface Props {
   className?: string;
   element?: string
   open?: boolean
+  fullscreen?: boolean
 }
 
 
-const Drawer = styled.div<{ show: boolean }>`
-  border-radius: 20px 20px 0 0;
+const Drawer = styled.div<{ show: boolean, fullscreen: boolean }>`
   background: #ffffff;
-  border: 1px solid rgba(245, 245, 255, 0.2);
-  border-radius: 16px 16px 0px 0px;
   overflow: hidden;
   position: fixed;
   width: 400px;
   left: 50%;
   transform: translateX(-50%);
-  transition: all .5s;
+  /* transition: all .5s; */
   bottom: ${(props) => props.show ? "0" : "-100%"};
   box-shadow: 0px 5px 31px -2px rgb(0 0 0 / 28%);
+  height: ${({ fullscreen }) => fullscreen ? "100%" : "auto"};
+  border-radius: ${({ fullscreen }) => fullscreen ? "none" : "16px 16px 0px 0px"};
 `;
 
-const Dialog = ({ children, open = false, onClose, className = 'root-portal', element = 'div' }: Props) => {
+const Dialog = ({ children, open = false, onClose, className = 'root-portal', element = 'div', fullscreen = false }: Props) => {
 
   const actionsRef = useRef(null);
 
@@ -49,7 +49,7 @@ const Dialog = ({ children, open = false, onClose, className = 'root-portal', el
   }, [container]);
 
   return ReactDOM.createPortal(
-    <Drawer show={open}><div ref={actionsRef}>{children}</div></Drawer>,
+    <Drawer className={className} fullscreen={fullscreen} show={open}><div ref={actionsRef}>{children}</div></Drawer>,
     container
   );
 };
