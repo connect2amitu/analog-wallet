@@ -15,7 +15,6 @@ const Welcome = ({ className }: { className?: string }) => {
 
 
 
-  console.info('browser.getBrowser() 2 =>', browser.getBrowser());
   if (!!browser.getBrowser() && !!browser.getBrowser().name && !!browser.getOS().name) {
     window.localStorage.setItem('browserInfo', browser.getBrowser().name as string);
     window.localStorage.setItem('osInfo', browser.getOS().name as string);
@@ -24,7 +23,6 @@ const Welcome = ({ className }: { className?: string }) => {
 
   useEffect(() => {
     const isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
-    console.info('isWelcomeDone=>', isWelcomeDone);
 
     if (isWelcomeDone) {
       onAction("/")

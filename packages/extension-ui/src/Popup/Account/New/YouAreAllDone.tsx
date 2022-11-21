@@ -78,7 +78,7 @@ const YouAreAllDone = ({ className, onChange }: Props) => {
 
   const _onChange = useCallback(() => {
     localStorage.setItem("step", "1")
-    localStorage.setItem("auth", "true")
+    localStorage.setItem("auth", "ok")
     onChange()
   }, [onChange])
 

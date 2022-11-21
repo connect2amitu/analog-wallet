@@ -1,19 +1,27 @@
-import React, { lazy, useCallback } from 'react';
+import React, { lazy, useCallback, useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router';
 
 import { ErrorBoundary, LoadingContainer, ActionContext } from '../components';
 import ToastProvider from '../components/toast/ToastProvider';
 
-const ImportSeed = lazy(() => import('./Account/ImportSeed'));
-const CreateAccount = lazy(() => import('./Account/New'));
-const Home = lazy(() => import('./Home'));
-const Lock = lazy(() => import('./Lock'));
-const Welcome = lazy(() => import('./Welcome'));
+import ImportSeed from "./Account/ImportSeed"
+import CreateAccount from "./Account/New"
+import Home from "./Home"
+import Lock from "./Lock"
+import Welcome from "./Welcome"
 
 const Popup = () => {
 
+  const [isWelcomeDone, setWelcomeDone] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+
   const _onAction = useCallback(
     (to?: string): void => {
+      const _isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
+      const _isLogin = window.localStorage.getItem('auth') === 'ok';
+      setWelcomeDone(_isWelcomeDone);
+      setIsLogin(_isLogin);
 
       if (to) {
         window.location.hash = to;
@@ -22,13 +30,24 @@ const Popup = () => {
     []
   );
 
+  useEffect((): void => {
+    const _isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
+    const _isLogin = window.localStorage.getItem('auth') === 'ok';
+
+    setWelcomeDone(_isWelcomeDone);
+    setIsLogin(_isLogin);
+    const beforeNav = window.localStorage.getItem('popupNavigation');
+
+    if (_isWelcomeDone && _isLogin) {
+      window.location.hash = '/';
+    } else if (beforeNav) {
+      window.location.hash = beforeNav;
+    }
+  }, []);
+
   function wrapWithErrorBoundary(component: React.ReactElement, trigger?: string): React.ReactElement {
     return <ErrorBoundary trigger={trigger}>{component}</ErrorBoundary>;
   }
-
-  const isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
-  const isLogin = window.localStorage.getItem('auth') === 'true';
-
 
   const Root = isWelcomeDone && isLogin
     ? wrapWithErrorBoundary(<Home />, 'Home')
@@ -38,10 +57,11 @@ const Popup = () => {
     <ActionContext.Provider value={_onAction}>
       <ToastProvider>
         <Switch>
+          <Route exact path='/' > {Root} </Route>
           <Route path='/account/create'>{wrapWithErrorBoundary(<CreateAccount />, 'account-creation')}</Route>
           <Route path='/account/import-seed'>{wrapWithErrorBoundary(<ImportSeed />, 'import-seed')}</Route>
           <Route path='/account/locked'>{wrapWithErrorBoundary(<Lock />, 'locked')}</Route>
-          <Route exact path='/' > {Root} </Route>
+          <Route path='*'>{wrapWithErrorBoundary(<h1>404</h1>, 'page not found')}</Route>
         </Switch>
       </ToastProvider>
     </ActionContext.Provider>

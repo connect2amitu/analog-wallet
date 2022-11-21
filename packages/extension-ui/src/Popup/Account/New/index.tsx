@@ -25,7 +25,6 @@ function CreateAccount({ className }: Props): React.ReactElement {
 
   useEffect((): void => {
     const lastStep = Number(localStorage.getItem("step")) || 1;
-    console.info('lastStep=>', typeof lastStep);
     setStep(lastStep)
     setSeed("physical undo offer dumb hawk fruit harsh main poem bounce ginger owner")
   }, []);
@@ -41,6 +40,7 @@ function CreateAccount({ className }: Props): React.ReactElement {
       setTimeout(() => {
         setIsBusy(false);
         window.localStorage.setItem('popupNavigation', '/');
+        localStorage.setItem("step", "0")
         onAction('/');
       }, 2000);
     },
@@ -69,7 +69,7 @@ function CreateAccount({ className }: Props): React.ReactElement {
       case 3:
         return <CreatePassword onChange={onNextStep} />
       case 4:
-        return <YouAreAllDone onChange={() => { onCreate() }} />
+        return <YouAreAllDone onChange={onCreate} />
       default:
         return <></>
     }

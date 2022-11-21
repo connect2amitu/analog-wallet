@@ -76,7 +76,7 @@ const CreatePassword = ({ onChange, className }: Props) => {
   const [passwordStrength, setPasswordStrength] = useState(0);
 
 
-  const { reset, watch, handleSubmit, formState: { errors, isDirty, isValid }, control, getValues } = useForm({
+  const { watch, handleSubmit, formState: { errors, isDirty, isValid }, control } = useForm({
     mode: "all",
     reValidateMode: "onChange",
     resolver: yupResolver(validationSchema)
@@ -105,7 +105,7 @@ const CreatePassword = ({ onChange, className }: Props) => {
   return (
     <div className={className}>
       <PageHeading>
-        <h1>{t("Сreate a password")}</h1>
+        <h1>{t("Create a password")}</h1>
         <p>{t("You will use this unlock your wallet")}</p>
       </PageHeading>
 

@@ -6,9 +6,9 @@ import ActionBlock from './ActionBlock'
 import Footer from './Footer'
 import styled from 'styled-components'
 
-const Home = () => {
+const Home = ({ className }: { className?: string }) => {
   return (
-    <Container>
+    <Container className={className}>
       <Navbar />
       <ActionBlock />
 
@@ -19,5 +19,5 @@ const Home = () => {
 }
 
 export default styled(Home)`
-  
+position: relative;
 `
