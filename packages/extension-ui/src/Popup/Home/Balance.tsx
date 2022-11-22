@@ -9,7 +9,7 @@ const Balance = ({ className }: Props) => {
   return (
     <div className={className}>
       <span className='balance-amount'>
-        $0.00
+        $10,005.38
       </span>
     </div>
   )

@@ -168,10 +168,11 @@ export default styled(WalletSelector)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
   
   .box{
     background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 4px 9px rgba(241, 231, 255, 0.5);
+    box-shadow: 0 0 7px 3px rgb(15 0 64 / 10%);
     border-radius: 8px;
     height: 30px;
     padding: 9px;

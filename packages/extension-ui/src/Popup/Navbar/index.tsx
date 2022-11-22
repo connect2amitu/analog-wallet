@@ -11,6 +11,12 @@ interface Props {
   className?: string;
 }
 
+const Image = styled.img`
+  width: ${(props: any) => (props.width ? `${props.width}px` : '19.64px')};
+  height: ${(props: any) => (props.height ? `${props.height}px` : '19.64px')};
+  cursor: pointer;
+`;
+
 const NavBar = (props: Props) => {
 
   const [openActivity, setOpenActivity] = useState(false)
@@ -30,26 +36,28 @@ const NavBar = (props: Props) => {
   return (
     <div className={className}>
       <div className="container">
-        <img
-          onClick={() => onMenubarHandler()}
+
+        <Image onClick={() => onMenubarHandler()}
           className='icon'
           src={HamburgerIcon}
           height={20}
           width={20}
-          alt="icon"
-        />
-        <img
+          alt="icon" />
+
+        <Image
           onClick={() => onActivityHandler()}
           className='icon'
           src={ActivityIcon}
           height={20}
           width={20}
-          alt="icon"
-        />
+          alt="icon" />
+
       </div>
       <Sidebar open={openMenubar}>
         <Header title="Settings" subTitle="" onBack={() => { setOpenMenubar(false) }} />
-
+        <div className="setting-container">
+          <h1 className="title">Coming soon</h1>
+        </div>
       </Sidebar>
 
       <Sidebar open={openActivity}>
@@ -105,6 +113,24 @@ export default styled(NavBar)`
     text-align: center;
     color: #746B92;
     margin-top: 6px;
+  }
+}
+
+.setting-container{
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .title{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    color: #0F0040;
+    margin-top: 17px;
+    margin-bottom: 0;
   }
 }
 `

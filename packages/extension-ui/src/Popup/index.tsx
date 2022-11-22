@@ -6,6 +6,7 @@ import ToastProvider from '../components/toast/ToastProvider';
 
 import ImportSeed from "./Account/ImportSeed"
 import CreateAccount from "./Account/New"
+import Components from './Components';
 import Home from "./Home"
 import Lock from "./Lock"
 import Welcome from "./Welcome"
@@ -61,6 +62,7 @@ const Popup = () => {
           <Route path='/account/create'>{wrapWithErrorBoundary(<CreateAccount />, 'account-creation')}</Route>
           <Route path='/account/import-seed'>{wrapWithErrorBoundary(<ImportSeed />, 'import-seed')}</Route>
           <Route path='/account/locked'>{wrapWithErrorBoundary(<Lock />, 'locked')}</Route>
+          <Route path='/components'>{wrapWithErrorBoundary(<Components />, 'components')}</Route>
           <Route path='*'>{wrapWithErrorBoundary(<h1>404</h1>, 'page not found')}</Route>
         </Switch>
       </ToastProvider>
