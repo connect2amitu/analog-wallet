@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { size } from 'lodash';
 
 import { AssetsInfo } from '../../shared/constants';
@@ -9,13 +10,14 @@ import NoAssetIcon from "../../assets/icons/no-asset.svg";
 import UpIcon from "../../assets/icons/up.svg";
 
 const AssetBlock = ({ assets, className }: { className?: string, assets: AssetsInfo[] }) => {
-  console.info(`assets=>`, size(assets));
+  const { t } = useTranslation();
+
   return (
     <div className={className}>
 
       {size(assets) <= 0 && <div className='no-assets'>
         <img src={NoAssetIcon} alt="close-icon" height={110} width={110} />
-        <span className='title'>Add your first Asset</span>
+        <span className='title'>{t("Add your first Asset")}</span>
       </div>}
 
       {

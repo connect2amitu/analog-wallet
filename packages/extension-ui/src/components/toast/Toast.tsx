@@ -21,16 +21,17 @@ export default styled(Toast) <{ visible: boolean }>`
   text-align: center;
   vertical-align: middle;
   line-height: 7px;
-  top: 69px;
-  left: calc(50% - 50px);
-  background: #FFFFFF;
-  color: #0F0040;
+  top: 13px;
+  left: calc(50% - 38px);
+  background: #2CC99A;
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 14px;
   border-radius: 6px;
-  padding: 12px;
   margin: auto;
   box-shadow: 0 0 20px 6px rgb(15 0 64 / 10%);
   span{
-    color: #333333;
+    color: #fff;
     font-size: 14px;
   }
 `;
