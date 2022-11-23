@@ -2,65 +2,87 @@ import React from 'react';
 import styled from 'styled-components';
 import { ThemeProps } from '@analog/extension-ui/types';
 import SearchIcon from "../../assets/icons/search.svg";
+import CloseIcon from "../../assets/icons/close-gray.svg";
 
 
-interface Props {
+interface Props extends ThemeProps {
   name: string;
-  type: "text" | "password";
+  type?: "text" | "password";
   className?: string;
   value?: string;
   placeholder?: string;
+  clearable?: boolean;
   onChange?: (val: any) => void | undefined;
 }
 
 const SearchBox = (props: Props) => {
-  const { name, className, value = "", onChange, type = "text", placeholder = "" } = props;
+  const { name, className, value = "", onChange, type = "text", placeholder = "", clearable = true } = props;
 
   return (
     <div className={className}>
       <div className="search-input">
-        {/* <img src={SearchIcon} alt="search-icon" className="search-icon" /> */}
+        <img src={SearchIcon} alt="search-icon" className="search-icon" />
         <input
           className="search"
           autoComplete="off"
           placeholder={placeholder}
           name={name}
-          defaultValue={value}
+          value={value}
           type={type}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
+        {clearable && <div className='clear-icon' onClick={() => onChange && onChange("")}>
+          <img src={CloseIcon} alt="clear-icon" className="icon" />
+        </div>}
       </div>
     </div>
   );
 };
 
-export default styled(SearchBox)(({ theme }: ThemeProps) => `
+export default styled(SearchBox)(({ clearable }: Props) => `
   height: auto;
   margin-top: 10px;
 
   .search-input {
     position: relative;
+    background: #FFFFFF; 
+    border-radius: 10px;
+    height: 36px;
+    width: 100%;
+    cursor: pointer;
+
     .search-icon {
-      padding: 9px 12px;
       position: absolute;
-      z-index: 1;
+      left: 15px;
       top: 50%;
       transform: translateY(-50%);
-      left: 15px;
+    }
+    .clear-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 16px;
+      width: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        border-radius: 0px;
+        background: #F2F0F5;
+        border-radius: 50%;
+        padding: 5px;
+      }
     }
     .search {
-      font-weight: 400;
-    padding: 9px 0;
-      font-size: 12px;
-      line-height: 18px;
-      color: #0F0040;
-      backdrop-filter: blur(9px);
-      border-radius: 10px;
-      outline: none;
-      /* width: calc(100% - 70px); */
+      height: 100%;
       width: 100%;
-      background: #FFFFFF;
-      border: 1px solid rgba(15, 0, 64, 0.08);
-      box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.07);
+      padding-left: 35px; 
+      font-size: 12px;
+      outline: none;
+      width: 100%;
+      background: #FFFFFF; 
+      color: #0F0040;
+      padding-right: ${clearable ? "40px" : "10px"};
     }
   }
 `);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getLogoByNetworkKey } from '../shared/functions';
 
 import { ThemeProps } from '../types';
 
@@ -26,6 +27,19 @@ export default styled(Main)(({ theme }: ThemeProps) => `
   overflow:hidden;
   width: 400px;
   margin: 0 auto;
+  position:relative;
+
+  ::before{
+    content:"";
+    background: ${`url(${getLogoByNetworkKey("background")})`};
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 
   * {
     font-family: ${theme.fontFamily};

@@ -42,3 +42,40 @@ export const ASSET_LIST: Assets[] = [
     checked: false
   }
 ]
+
+
+export interface AssetsInfo {
+  icon: LogoEnum;
+  title: string;
+  amount: string;
+  balance: string;
+  change: string;
+  symbol: string;
+}
+
+export const ASSET_SELECTED_LIST: AssetsInfo[] = [
+  {
+    icon: "bitcoin",
+    title: "Bitcoin",
+    amount: "$0.547",
+    balance: "12789,45",
+    change: "1.3%",
+    symbol: "BTC"
+  },
+  {
+    icon: "ethereum",
+    title: "Ethereum",
+    amount: "$0.547",
+    balance: "12789,45",
+    change: "1.3%",
+    symbol: "ETH"
+  },
+  {
+    icon: "polkadot",
+    title: "Polkadot",
+    amount: "$0.547",
+    balance: "12789,45",
+    change: "1.3%",
+    symbol: "DOT"
+  }
+]

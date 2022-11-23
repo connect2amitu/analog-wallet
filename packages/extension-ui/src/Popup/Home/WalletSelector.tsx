@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { Dialog } from '../../components';
 
@@ -9,6 +10,7 @@ import OpenIcon from "../../assets/icons/open-icon.svg";
 import CloseIcon from "../../assets/icons/close.svg";
 import WalletOneIcon from "../../assets/icons/wallet-1.svg";
 import WalletTwoIcon from "../../assets/icons/wallet-2.svg";
+import { useToast } from '../../components/toast/ToastProvider';
 
 
 interface Props {
@@ -50,7 +52,6 @@ const CloseButton = styled.div`
   right: 16px;
   top: 8px;
 `;
-
 
 const WalletCard = styled.div`
   background: #FFFFFF;
@@ -109,6 +110,8 @@ const DUMMY_ACCOUNTS = [
 const WalletSelector = ({ className }: Props) => {
   const { t } = useTranslation();
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { show } = useToast();
+
 
   return (
     <div className={className}>
@@ -119,7 +122,9 @@ const WalletSelector = ({ className }: Props) => {
         </div>
         <div className='action-btn-wrap'>
           <div className='btn'>
-            <Image src={CopyIcon} alt="cross-icon" height={11} width={11} />
+            <CopyToClipboard text={"My Universal Wallet 1"} onCopy={() => show("Copied!")}>
+              <Image src={CopyIcon} alt="cross-icon" height={11} width={11} />
+            </CopyToClipboard>
           </div>
           <div className='btn open-link' onClick={() => setOpenDrawer(true)}>
             <Image src={OpenIcon} alt="cross-icon" height={11} width={11} />
@@ -150,7 +155,9 @@ const WalletSelector = ({ className }: Props) => {
                       <p className='address'>{address}</p>
                     </div>
                   </div>
-                  <Image src={CopyIcon} alt="cross-icon" height={16} width={16} />
+                  <CopyToClipboard text={address} onCopy={() => show("Copied!")}>
+                    <Image src={CopyIcon} alt="cross-icon" height={16} width={16} />
+                  </CopyToClipboard>
                 </WalletCard>
               )
             }

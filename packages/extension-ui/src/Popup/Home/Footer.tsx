@@ -2,19 +2,14 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next';
 
-
+import AssetDrawer from './AssetDrawer';
 
 import AddIcon from "../../assets/icons/add.svg";
-
-import { cloneDeep } from 'lodash';
-import AssetDrawer from './AssetDrawer';
 
 const Footer = ({ className }: { className?: string }) => {
 
   const { t } = useTranslation();
   const [openDrawer, setOpenDrawer] = useState(false);
-
-
 
   return (
     <div className={className}>

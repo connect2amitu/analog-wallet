@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { cloneDeep, some } from 'lodash';
+import { cloneDeep, size, some } from 'lodash';
 
 import { Button, Dialog, SearchBox } from '../../components';
 import AssetsCard from './AssetsCard';
 import { ASSET_LIST } from '../../shared/constants';
 
 import BackIcon from "../../assets/icons/back.svg";
+import { getLogoByNetworkKey } from '../../shared/functions';
 
 
 const AddAssetDrawer = styled.div<{ show: boolean }>`
-  background: #ffffff;
   height: 100vh;
+  background: ${`url(${getLogoByNetworkKey("background")})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
 `;
 
 const Heading = styled.div`
@@ -42,25 +47,27 @@ const Container = styled.div`
     color: #0F0040;
   }
 
+  .search-container{
+    padding: 24px 16px;
+  }
+
   .asset-list{
     display: flex;
     align-items: center;
     justify-content: start;
     flex-direction: column;
     align-items: self-start;
-    height: calc(100vh - 150px);
     overflow: auto;
     padding: 24px 16px;
-    height: calc(100vh - 227px);
+    height: calc(100vh - 220px);
+
   }
 
   .save-btn{
     padding: 24px 16px;
   }
 
-  .search-input{
-    padding: 4px 16px;
-  }
+
 
   .search{
     background: #FFFFFF;
@@ -123,10 +130,12 @@ const AssetDrawer = ({ open, onClose }: { open: boolean, onClose: () => void }) 
 
           <Container>
 
-            <SearchBox className='search-box' placeholder='Search...' name='search' value={search} onChange={onSearch} type='text' />
+            <div className='search-container'>
+              <SearchBox placeholder='Search...' name='search' value={search} onChange={onSearch} />
+            </div>
             <div className="asset-list">
               {
-                assets.map(({ amount, checked, title, icon, unit }, index) =>
+                size(assets) > 0 ? assets.map(({ amount, checked, title, icon, unit }, index) =>
                   <AssetsCard
                     search={search}
                     amount={amount}
@@ -135,7 +144,7 @@ const AssetDrawer = ({ open, onClose }: { open: boolean, onClose: () => void }) 
                     icon={icon}
                     unit={unit}
                     onSelect={(val: boolean) => onSelectAsset(val, index)}
-                  />)
+                  />) : <div>NO Assets</div>
               }
             </div>
 
