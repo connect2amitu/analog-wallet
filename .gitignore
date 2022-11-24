@@ -9,3 +9,4 @@ package-lock.json
 .idea
 yarn.lock
 yarn-error.log
+packages/extension-ui/src/Popup/Home/AssetBlock-WithArrow-Backup.tsx

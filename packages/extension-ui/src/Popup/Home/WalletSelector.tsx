@@ -121,11 +121,11 @@ const WalletSelector = ({ className }: Props) => {
           <div className='selected-wallet'><p>My Universal Wallet 1 </p></div>
         </div>
         <div className='action-btn-wrap'>
-          <div className='btn'>
-            <CopyToClipboard text={"My Universal Wallet 1"} onCopy={() => show("Copied!")}>
+          <CopyToClipboard text={"My Universal Wallet 1"} onCopy={() => show("Copied!")}>
+            <div className='btn'>
               <Image src={CopyIcon} alt="cross-icon" height={11} width={11} />
-            </CopyToClipboard>
-          </div>
+            </div>
+          </CopyToClipboard>
           <div className='btn open-link' onClick={() => setOpenDrawer(true)}>
             <Image src={OpenIcon} alt="cross-icon" height={11} width={11} />
           </div>

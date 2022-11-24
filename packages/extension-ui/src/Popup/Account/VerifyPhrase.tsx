@@ -148,11 +148,11 @@ const VerifyPhrase = ({ onChange, className }: Props) => {
   const [selectedShuffledMnemonic, setSelectedShuffledMnemonic] = useState<string[]>([])
   const [validMnemonic, setValidMnemonic] = useState<string[]>([])
   const [inValidMnemonic, setInValidMnemonic] = useState<string[]>([])
+  const mnemonic = "physical undo offer dumb hawk fruit harsh main poem bounce ginger owner";
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    const mnemonic = "physical undo offer dumb hawk fruit harsh main poem bounce ginger owner";
     const mnemonicList: string[] = mnemonic.split(" ")
     const mnemonicShuffleArray = shuffle(mnemonicList);
 
@@ -188,6 +188,11 @@ const VerifyPhrase = ({ onChange, className }: Props) => {
     setInValidMnemonic(clonedInValidMnemonic)
   }
 
+  const showTooltipText = (word: string) => {
+    const index = mnemonic.split(" ").indexOf(word)
+    return index === 0 ? "First" : "Last"
+  }
+
   return (
     <div className={className}>
       <PageHeading>
@@ -199,7 +204,7 @@ const VerifyPhrase = ({ onChange, className }: Props) => {
         {chunk(selectedShuffledMnemonic, 3).map((mnemonicItem, index) =>
           <div className={index % 2 ? "odd" : "even"}>
             {mnemonicItem.map((word, index) =>
-              <Phrase key={index} tooltip={selectedMnemonic[0] === word ? "First" : "Last"} valid={selectedMnemonic.includes(word)} invalid={inValidMnemonic.includes(word)} label={word} onClick={() => selectMnemonic(word)} />
+              <Phrase key={index} tooltip={showTooltipText(word)} valid={selectedMnemonic.includes(word)} invalid={inValidMnemonic.includes(word)} label={word} onClick={() => selectMnemonic(word)} />
             )}
           </div>
         )}

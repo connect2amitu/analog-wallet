@@ -10,7 +10,7 @@ const darkTheme = {
   logo: analogLogoDark,
   primaryColor: basicThemeColors.primary,
   secondaryColor: basicThemeColors.secondary,
-  tabColor: "#0F0040",
+  tabColor: "linear-gradient(89.78deg, #2406E2 0.19%, #7B35EE 99.81%)",
   accountBackground: '#1A1B20',
   accountDotsIconColor: '#8E8E8E',
   addAccountImageBackground: '#1A1B20',
