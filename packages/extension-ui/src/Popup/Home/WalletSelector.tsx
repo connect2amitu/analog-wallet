@@ -133,7 +133,7 @@ const WalletSelector = ({ className }: Props) => {
       </div>
 
 
-      <Dialog open={openDrawer} onClose={setOpenDrawer}>
+      <Dialog fullscreen={false} open={openDrawer} onClose={setOpenDrawer}>
         <>
           <Heading>
             <Title>{t("Wallets")}</Title>

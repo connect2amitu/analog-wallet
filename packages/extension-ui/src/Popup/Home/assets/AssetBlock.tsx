@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { size } from 'lodash';
 
-import { AssetsInfo } from '../../shared/constants';
-import { getLogoByNetworkKey } from '../../shared/functions';
+import { AssetsInfo } from '../../../shared/constants';
+import { getLogoByNetworkKey } from '../../../shared/functions';
 
-import NoAssetIcon from "../../assets/icons/no-asset.svg";
-import UpIcon from "../../assets/icons/up.svg";
+import NoAssetIcon from "../../../assets/icons/no-asset.svg";
+import UpIcon from "../../../assets/icons/up.svg";
 
 const AssetBlock = ({ assets, className }: { className?: string, assets: AssetsInfo[] }) => {
   const { t } = useTranslation();

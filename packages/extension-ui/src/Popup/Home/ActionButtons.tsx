@@ -1,33 +1,55 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import QRModal from '../../components/modal/QRModal';
+import { useTranslation } from 'react-i18next';
 
 import ReceiveIcon from "../../assets/icons/recieve.svg";
 import SendIcon from "../../assets/icons/send.svg";
-import Modal from '../../components/modal';
+import { Dialog } from '../../components';
+import Drawer from '../../partials/DrawerHeader';
+import Send from './transactions/Send';
+import Recieve from './transactions/Recieve';
 
 interface Props {
   className?: string;
 }
 
-const Image = styled.img`
-  width: ${(props: any) => (props.width ? `${props.width}px` : '19.64px')};
-  height: ${(props: any) => (props.height ? `${props.height}px` : '19.64px')};
-`;
-
 const ActionButtons = ({ className }: Props) => {
+  const [openSend, setOpenSend] = useState(true);
+  const [openRecieve, setOpenRecieve] = useState(false);
+
+  const { t } = useTranslation();
+
+  const toggleSendDrawer = () => {
+    setOpenSend(prev => !prev)
+  }
+
+  const toggleRecieveDrawer = () => {
+    setOpenRecieve(prev => !prev)
+  }
+
   return (
     <div className={className}>
-      <button className='btn'>
-        <Image src={ReceiveIcon} alt="receive-icon" height={16} width={16} />
-        <span>Receive</span>
+      <button className='btn' onClick={toggleRecieveDrawer}>
+        <img src={ReceiveIcon} alt="receive-icon" height={16} width={16} />
+        <span>{t("Recieve")}</span>
       </button>
-      <button className='btn' >
-        <Image src={SendIcon} alt="send-icon" height={16} width={16} />
-        <span>Send</span>
+      <button className='btn' onClick={toggleSendDrawer}>
+        <img src={SendIcon} alt="send-icon" height={16} width={16} />
+        <span>{t("Send")}</span>
       </button>
-    </div>
+
+      <Dialog fullscreen={true} open={openRecieve}>
+        <Drawer onBack={toggleRecieveDrawer} title={t("Recieve")} >
+          <Recieve />
+        </Drawer>
+      </Dialog>
+
+      <Dialog fullscreen={true} open={openSend}>
+        <Drawer onBack={toggleSendDrawer} title={t("Send")} >
+          <Send />
+        </Drawer>
+      </Dialog>
+    </div >
   )
 }
 

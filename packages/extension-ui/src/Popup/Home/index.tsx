@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Navbar from '../Navbar'
 import ActionBlock from './ActionBlock'
 import Footer from './Footer'
-import AssetBlock from './AssetBlock'
+import AssetBlock from './assets/AssetBlock'
 import { Container } from '../../components'
 import { ASSET_SELECTED_LIST } from '../../shared/constants'
 
@@ -16,7 +16,6 @@ const Home = ({ className }: { className?: string }) => {
       <ActionBlock />
       <AssetBlock assets={ASSET_SELECTED_LIST} />
       <Footer />
-
     </Container>
   )
 }

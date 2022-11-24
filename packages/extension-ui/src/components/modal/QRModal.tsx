@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames';
 
 import Modal from '.';
+import styled from 'styled-components';
 
 interface WrapperProps {
   children?: JSX.Element;
@@ -20,9 +21,7 @@ const Wrapper = (props: WrapperProps) => {
       onClose={closeModal}
       wrapperClassName={'select-modal'}
     >
-      <div className={'QR-modal'}>
-        {children}
-      </div>
+      {children}
     </Modal>
   );
 };
@@ -37,4 +36,4 @@ const QRModal = ({ children, className, onClose }: any) => {
   )
 }
 
-export default QRModal
+export default styled(QRModal)``

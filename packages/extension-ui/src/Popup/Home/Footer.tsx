@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next';
 
-import AssetDrawer from './AssetDrawer';
+import AssetDrawer from './assets/AssetDrawer';
 
 import AddIcon from "../../assets/icons/add.svg";
 
@@ -20,7 +20,7 @@ const Footer = ({ className }: { className?: string }) => {
         <span className='menu-text'>{t("Add Asset")}</span>
       </div>
 
-      <AssetDrawer open={openDrawer} onClose={() => setOpenDrawer(false)} />
+      {openDrawer && <AssetDrawer open={openDrawer} onClose={() => setOpenDrawer(false)} />}
 
     </div>
   )

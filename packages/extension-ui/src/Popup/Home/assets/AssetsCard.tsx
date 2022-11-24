@@ -1,18 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Switch } from '../../components';
-import { getLogoByNetworkKey } from '../../shared/functions';
-import { Assets } from '../../shared/constants';
+import { Switch } from '../../../components';
+import { getLogoByNetworkKey } from '../../../shared/functions';
+import { Assets } from '../../../shared/constants';
 import Highlighter from 'react-highlight-words';
 
-export interface Props extends Assets {
+export interface Props {
   className?: string;
   search?: string;
+  asset: Assets;
   onSelect?: (val: boolean) => void | undefined;
 }
 
-const AssetsCard = ({ search = "", amount, checked, title, icon, unit, className, onSelect = () => { } }: Props) => {
+const AssetsCard = ({ search = "", asset, className, onSelect = () => { } }: Props) => {
+  const { amount, checked, title, icon, unit } = asset;
+
   return <div className={className}>
     <div className='left-section'>
       <div className='logo'>

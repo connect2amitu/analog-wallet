@@ -42,7 +42,7 @@ export default styled(Index)(({ theme }: ThemeProps) => `
     position: fixed;
     border-radius: 12px;
     top: 10%;
-    z-index: 1050;
+    z-index: 1500;
     left: 0px;
     right: 0px;
     margin: 0px auto;

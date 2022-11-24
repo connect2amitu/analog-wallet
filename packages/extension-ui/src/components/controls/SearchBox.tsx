@@ -12,11 +12,13 @@ interface Props extends ThemeProps {
   value?: string;
   placeholder?: string;
   clearable?: boolean;
-  onChange?: (val: any) => void | undefined;
+  actionIcon?: string;
+  onChange?: (val: string) => void | undefined;
+  onActionClick?: () => void | undefined;
 }
 
 const SearchBox = (props: Props) => {
-  const { name, className, value = "", onChange, type = "text", placeholder = "", clearable = true } = props;
+  const { name, className, value = "", onChange, type = "text", placeholder = "", clearable = true, actionIcon = CloseIcon, onActionClick } = props;
 
   return (
     <div className={className}>
@@ -30,8 +32,8 @@ const SearchBox = (props: Props) => {
           value={value}
           type={type}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
-        {clearable && <div className='clear-icon' onClick={() => onChange && onChange("")}>
-          <img src={CloseIcon} alt="clear-icon" className="icon" />
+        {clearable && <div className='action-icon' onClick={onActionClick}>
+          <img src={actionIcon} alt="action-icon" className="icon" />
         </div>}
       </div>
     </div>
@@ -56,7 +58,7 @@ export default styled(SearchBox)(({ clearable }: Props) => `
       top: 50%;
       transform: translateY(-50%);
     }
-    .clear-icon {
+    .action-icon {
       position: absolute;
       right: 15px;
       top: 50%;
@@ -66,11 +68,10 @@ export default styled(SearchBox)(({ clearable }: Props) => `
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #F2F0F5;
+      border-radius: 50%;
+      padding: 10px;
       img{
-        border-radius: 0px;
-        background: #F2F0F5;
-        border-radius: 50%;
-        padding: 5px;
       }
     }
     .search {

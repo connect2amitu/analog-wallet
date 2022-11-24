@@ -13,10 +13,13 @@ interface Props {
 const ActionBlock = ({ className }: Props) => {
   return (
     <div className={className}>
+      {/* show balance */}
       <Balance />
 
+      {/* wallet change and open wallet drawer */}
       <WalletSelector />
 
+      {/* send recieve button */}
       <ActionButtons />
     </div>
   )
@@ -24,5 +27,4 @@ const ActionBlock = ({ className }: Props) => {
 
 export default styled(ActionBlock)`
 margin-top: 6px;
-  
 `
