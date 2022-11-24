@@ -11,12 +11,6 @@ interface Props {
   className?: string;
 }
 
-const Image = styled.img`
-  width: ${(props: any) => (props.width ? `${props.width}px` : '19.64px')};
-  height: ${(props: any) => (props.height ? `${props.height}px` : '19.64px')};
-  cursor: pointer;
-`;
-
 const NavBar = (props: Props) => {
 
   const [openActivity, setOpenActivity] = useState(false)
@@ -37,14 +31,14 @@ const NavBar = (props: Props) => {
     <div className={className}>
       <div className="container">
 
-        <Image onClick={() => onMenubarHandler()}
+        <img onClick={() => onMenubarHandler()}
           className='icon'
           src={HamburgerIcon}
           height={20}
           width={20}
           alt="icon" />
 
-        <Image
+        <img
           onClick={() => onActivityHandler()}
           className='icon'
           src={ActivityIcon}
@@ -63,17 +57,19 @@ const NavBar = (props: Props) => {
       <Sidebar open={openActivity}>
         <Header title="Activity" subTitle="" onBack={() => { setOpenActivity(false) }} />
         <div className="activity-container">
-          <img
+          <div className="no-activty">
+            <img
 
-            onClick={() => setOpenMenubar(false)}
-            className='no-activity-icon'
-            src={NoActivityIcon}
-            height={20}
-            width={20}
-            alt="icon"
-          />
-          <h1 className="title">No activity yet</h1>
-          <span className="sub-title">Your activities will show up here </span>
+              onClick={() => setOpenMenubar(false)}
+              className='no-activity-icon'
+              src={NoActivityIcon}
+              height={20}
+              width={20}
+              alt="icon"
+            />
+            <h1 className="title">No activity yet</h1>
+            <span className="sub-title">Your activities will show up here </span>
+          </div>
         </div>
       </Sidebar>
     </div>
@@ -89,10 +85,14 @@ export default styled(NavBar)`
 
 .activity-container{
   height: calc(100vh - 80px);
-  display: flex;
+  
+
+  .no-activty{
+    display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
   .no-activity-icon{
     width: 165px;
     height: 164.61px;
@@ -114,6 +114,8 @@ export default styled(NavBar)`
     color: #746B92;
     margin-top: 6px;
   }
+  }
+  
 }
 
 .setting-container{

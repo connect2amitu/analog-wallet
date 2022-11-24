@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
+
+import QRModal from '../../components/modal/QRModal';
 
 import ReceiveIcon from "../../assets/icons/recieve.svg";
 import SendIcon from "../../assets/icons/send.svg";
-
+import Modal from '../../components/modal';
 
 interface Props {
   className?: string;
@@ -21,7 +23,7 @@ const ActionButtons = ({ className }: Props) => {
         <Image src={ReceiveIcon} alt="receive-icon" height={16} width={16} />
         <span>Receive</span>
       </button>
-      <button className='btn'>
+      <button className='btn' >
         <Image src={SendIcon} alt="send-icon" height={16} width={16} />
         <span>Send</span>
       </button>
@@ -34,6 +36,7 @@ margin-top: 15px;
 display: flex;
 justify-content: center;
 gap: 8px;
+
 .btn{
   background: #eae6fc;
   border-radius: 12px;
