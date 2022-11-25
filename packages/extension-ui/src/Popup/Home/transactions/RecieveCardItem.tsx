@@ -1,43 +1,43 @@
 import React from 'react'
 import styled from 'styled-components';
 
-import ThreeDotIcon from "../../../assets/icons/three-dot.svg"
+import { getLogoByNetworkKey } from '../../../shared/functions';
+import { Assets } from './Recieve';
 
 interface Props {
   className?: string;
-  contacts?: any; // update the interface later on
+  asset: Assets; // update the interface later on
 }
 
-const SendCardItem = (props: Props) => {
-  const { contacts: { name, address, icon }, className } = props;
+const RecieveCardItem = ({ asset, className }: Props) => {
 
   return (
     <div className={className}>
       <div className='send-card-wrapper'>
-        <img src={icon} alt="cross-icon" height={40} width={40} />
+        <img src={getLogoByNetworkKey(asset.icon)} alt="cross-icon" height={30} width={30} />
         <div className='detail'>
-          <p className='title'>{name}</p>
-          <p className='address'>{address}</p>
+          <p className='title'>{asset.title}</p>
         </div>
       </div>
 
-      <div className='menu-icon'>
-        <img src={ThreeDotIcon} alt="menu-icon" height={13} width={3} />
+      <div className='amount-meta'>
+        <span>{asset.amount} {asset.unit}</span>
       </div>
     </div>
   )
 }
 
-export default styled(SendCardItem)`
+export default styled(RecieveCardItem)`
 
-background: #FFFFFF;
-  box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
-  border-radius: 12px;
-  margin-top: 12px;
+/* background: #FFFFFF; */
+  /* box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1); */
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  justify-content: space-between;
+    width: 100%;
+  /* padding: 8px 16px; */
 
   .send-card-wrapper{
     display: flex;
@@ -50,7 +50,7 @@ background: #FFFFFF;
 
       .title{
         font-weight: 600;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 21px;
         color: #0F0040;
       }
@@ -64,10 +64,11 @@ background: #FFFFFF;
     }
   }
 
-  .menu-icon{
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
+  .amount-meta{
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #0F0040;
   }
 
   :first-of-type{

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import type { ThemeProps } from '../../types';
 
-
 interface Props {
   children: React.ReactNode;
   className?: string;
@@ -46,7 +45,7 @@ export default styled(Index)(({ theme }: ThemeProps) => `
     left: 0px;
     right: 0px;
     margin: 0px auto;
-    padding: 15px;
+    padding: 16px;
     background-color: #FFFFFF;
     box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
 

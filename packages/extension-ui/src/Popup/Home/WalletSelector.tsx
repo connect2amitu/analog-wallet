@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { Dialog } from '../../components';
+import { useToast } from '../../components/toast/ToastProvider';
+import ModalHeader from '../../partials/ModalHeader';
 
 import CopyIcon from "../../assets/icons/copy-gradient.svg";
 import OpenIcon from "../../assets/icons/open-icon.svg";
-import CloseIcon from "../../assets/icons/close.svg";
 import WalletOneIcon from "../../assets/icons/wallet-1.svg";
 import WalletTwoIcon from "../../assets/icons/wallet-2.svg";
-import { useToast } from '../../components/toast/ToastProvider';
 
 
 interface Props {
@@ -23,34 +23,11 @@ const Image = styled.img`
   cursor:pointer;
 `;
 
-const Heading = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 14px;
-`;
-
 const Container = styled.div`
-  margin-top: 11px;
   max-height: 250px;
   min-height: 160px;
   overflow: auto;
-  padding: 8px 16px;
-`;
-
-const Title = styled.div`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 26px;
-  color: #0F0040;
-`;
-
-const CloseButton = styled.div`
-  position: absolute;
-  right: 16px;
-  top: 8px;
+  padding: 16px;
 `;
 
 const WalletCard = styled.div`
@@ -62,6 +39,9 @@ const WalletCard = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px;
+  .icon{
+    cursor: pointer;
+  }
 
   .wallet-detail-wrapper{
     display: flex;
@@ -112,7 +92,6 @@ const WalletSelector = ({ className }: Props) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const { show } = useToast();
 
-
   return (
     <div className={className}>
       <div className='box'>
@@ -123,48 +102,40 @@ const WalletSelector = ({ className }: Props) => {
         <div className='action-btn-wrap'>
           <CopyToClipboard text={"My Universal Wallet 1"} onCopy={() => show("Copied!")}>
             <div className='btn'>
-              <Image src={CopyIcon} alt="cross-icon" height={11} width={11} />
+              <img className='icon' src={CopyIcon} alt="cross-icon" height={11} width={11} />
             </div>
           </CopyToClipboard>
           <div className='btn open-link' onClick={() => setOpenDrawer(true)}>
-            <Image src={OpenIcon} alt="cross-icon" height={11} width={11} />
+            <img className='icon' src={OpenIcon} alt="cross-icon" height={11} width={11} />
           </div>
         </div>
       </div>
 
 
+      {/* wallet drawer */}
       <Dialog fullscreen={false} open={openDrawer} onClose={setOpenDrawer}>
-        <>
-          <Heading>
-            <Title>{t("Wallets")}</Title>
-            <CloseButton onClick={() => setOpenDrawer(false)}>
-              <Image src={CloseIcon} alt="close-icon" height={12} width={12} />
-            </CloseButton>
-          </Heading>
-          <Container>
-
-            {
-              DUMMY_ACCOUNTS.map(({ title, icon, address }, index) =>
-                <WalletCard key={index}>
-                  <div className='wallet-detail-wrapper'>
-                    <div>
-                      <Image src={icon} alt="cross-icon" height={32} width={32} />
-                    </div>
-                    <div className='detail'>
-                      <p className='title'>{title}</p>
-                      <p className='address'>{address}</p>
-                    </div>
+        <Container>
+          <ModalHeader title={t("Wallets")} onClose={() => setOpenDrawer(false)} />
+          {
+            DUMMY_ACCOUNTS.map(({ title, icon, address }, index) =>
+              <WalletCard key={index}>
+                <div className='wallet-detail-wrapper'>
+                  <div>
+                    <img src={icon} alt="cross-icon" height={32} width={32} />
                   </div>
-                  <CopyToClipboard text={address} onCopy={() => show("Copied!")}>
-                    <Image src={CopyIcon} alt="cross-icon" height={16} width={16} />
-                  </CopyToClipboard>
-                </WalletCard>
-              )
-            }
-          </Container>
-        </>
+                  <div className='detail'>
+                    <p className='title'>{title}</p>
+                    <p className='address'>{address}</p>
+                  </div>
+                </div>
+                <CopyToClipboard text={address} onCopy={() => show("Copied!")}>
+                  <img className='icon' src={CopyIcon} alt="cross-icon" height={16} width={16} />
+                </CopyToClipboard>
+              </WalletCard>
+            )
+          }
+        </Container>
       </Dialog>
-
     </div>
   )
 }

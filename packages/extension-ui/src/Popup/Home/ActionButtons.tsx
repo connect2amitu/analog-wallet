@@ -14,7 +14,7 @@ interface Props {
 }
 
 const ActionButtons = ({ className }: Props) => {
-  const [openSend, setOpenSend] = useState(true);
+  const [openSend, setOpenSend] = useState(false);
   const [openRecieve, setOpenRecieve] = useState(false);
 
   const { t } = useTranslation();

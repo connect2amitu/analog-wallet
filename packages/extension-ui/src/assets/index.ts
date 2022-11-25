@@ -1,6 +1,7 @@
 
 
-export type LogoEnum = "background" | "analog" | "bifrost" | "crust" | "dot" | "bitcoin" | "ethereum" | "polkadot" | "default";
+export type LogoEnum = "background" | "analog" | "bifrost" | "crust" | "dot" | "bitcoin" | "ethereum" | "solana" | "polkadot" |
+  "tether" | "default";
 
 const LogosMap: Record<LogoEnum | string, string> = {
   analog: require('./logo/analog.svg'),
@@ -10,6 +11,8 @@ const LogosMap: Record<LogoEnum | string, string> = {
   dot: require('./logo/dot.svg'),
   bitcoin: require('./logo/bitcoin.svg'),
   ethereum: require('./logo/ethereum.svg'),
+  tether: require('./logo/tether.svg'),
+  solana: require('./logo/solana.svg'),
   polkadot: require('./logo/polkadot.svg'),
   default: require('./default.svg')
 };

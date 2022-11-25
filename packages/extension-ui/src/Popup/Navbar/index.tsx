@@ -81,6 +81,9 @@ export default styled(NavBar)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .icon{
+    cursor: pointer;
+  }
 }
 
 .activity-container{

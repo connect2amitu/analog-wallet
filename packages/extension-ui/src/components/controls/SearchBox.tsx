@@ -46,7 +46,6 @@ export default styled(SearchBox)(({ clearable }: Props) => `
 
   .search-input {
     position: relative;
-    background: #FFFFFF; 
     border-radius: 10px;
     height: 36px;
     width: 100%;

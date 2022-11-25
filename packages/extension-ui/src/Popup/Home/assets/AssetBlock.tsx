@@ -78,17 +78,15 @@ export default styled(AssetBlock)`
     align-items: center;
       .area-part-1{
         display: flex;
-    align-items: flex-start;
-
-    .logo{
-      margin-top: 5px;
-    }
+        align-items: center;
 
     .meta-wrapper{
       display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 8px;
+    gap:2px;
+
     .name{
       font-weight: 600;
     font-size: 12px;
@@ -99,7 +97,7 @@ export default styled(AssetBlock)`
       display: flex;
       align-items: center;
       margin-top: -5px;
-
+      line-height: 0;
       .change{
         margin-left: 8px;
         font-weight: 400;
@@ -125,6 +123,7 @@ export default styled(AssetBlock)`
         align-items: flex-end;
         justify-content: center;
         flex-direction: column;
+        gap:2px;
         .balance{
           font-weight: 600;
           font-size: 12px;
@@ -136,6 +135,7 @@ export default styled(AssetBlock)`
           font-size: 12px;
           color: #746B92;
           margin-top: -5px;
+          line-height:18px;
         }
       }
     }
