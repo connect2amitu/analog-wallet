@@ -202,7 +202,7 @@ const VerifyPhrase = ({ onChange, className }: Props) => {
 
       <Container>
         {chunk(selectedShuffledMnemonic, 3).map((mnemonicItem, index) =>
-          <div className={index % 2 ? "odd" : "even"}>
+          <div key={`parent-${index}`} className={index % 2 ? "odd" : "even"}>
             {mnemonicItem.map((word, index) =>
               <Phrase key={index} tooltip={showTooltipText(word)} valid={selectedMnemonic.includes(word)} invalid={inValidMnemonic.includes(word)} label={word} onClick={() => selectMnemonic(word)} />
             )}

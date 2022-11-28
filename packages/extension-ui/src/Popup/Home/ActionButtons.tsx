@@ -5,9 +5,10 @@ import { useTranslation } from 'react-i18next';
 import ReceiveIcon from "../../assets/icons/recieve.svg";
 import SendIcon from "../../assets/icons/send.svg";
 import { Dialog } from '../../components';
-import Drawer from '../../partials/DrawerHeader';
+import Drawer from '../../partials/Drawer';
 import Send from './transactions/Send';
 import Recieve from './transactions/Recieve';
+import ModalHeader from '../../partials/ModalHeader';
 
 interface Props {
   className?: string;
@@ -39,13 +40,13 @@ const ActionButtons = ({ className }: Props) => {
       </button>
 
       <Dialog fullscreen={true} open={openRecieve}>
-        <Drawer onBack={toggleRecieveDrawer} title={t("Recieve")} >
+        <Drawer onClose={toggleRecieveDrawer} title={t("Recieve")}>
           <Recieve />
         </Drawer>
       </Dialog>
 
       <Dialog fullscreen={true} open={openSend}>
-        <Drawer onBack={toggleSendDrawer} title={t("Send")} >
+        <Drawer title='Send' onClose={toggleSendDrawer} >
           <Send />
         </Drawer>
       </Dialog>

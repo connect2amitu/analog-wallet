@@ -17,17 +17,11 @@ interface Props {
   className?: string;
 }
 
-const Image = styled.img`
-  width: ${(props: any) => (props.width ? `${props.width}px` : '19.64px')};
-  height: ${(props: any) => (props.height ? `${props.height}px` : '19.64px')};
-  cursor:pointer;
-`;
-
 const Container = styled.div`
   max-height: 250px;
   min-height: 160px;
   overflow: auto;
-  padding: 16px;
+  padding:16px;
 `;
 
 const WalletCard = styled.div`
@@ -39,6 +33,10 @@ const WalletCard = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px;
+  &:first-of-type{
+    margin-top: 0;
+  }
+
   .icon{
     cursor: pointer;
   }
@@ -66,11 +64,10 @@ const WalletCard = styled.div`
         color: #9A97A6;
       }
     }
+   
   }
 
-  :first-of-type{
-    margin-top: 0;
-  }
+  
 `
 
 const DUMMY_ACCOUNTS = [
@@ -114,27 +111,29 @@ const WalletSelector = ({ className }: Props) => {
 
       {/* wallet drawer */}
       <Dialog fullscreen={false} open={openDrawer} onClose={setOpenDrawer}>
-        <Container>
+        <React.Fragment>
           <ModalHeader title={t("Wallets")} onClose={() => setOpenDrawer(false)} />
-          {
-            DUMMY_ACCOUNTS.map(({ title, icon, address }, index) =>
-              <WalletCard key={index}>
-                <div className='wallet-detail-wrapper'>
-                  <div>
-                    <img src={icon} alt="cross-icon" height={32} width={32} />
+          <Container>
+            {
+              DUMMY_ACCOUNTS.map(({ title, icon, address }, index) =>
+                <WalletCard key={index}>
+                  <div className='wallet-detail-wrapper'>
+                    <div>
+                      <img src={icon} alt="cross-icon" height={32} width={32} />
+                    </div>
+                    <div className='detail'>
+                      <p className='title'>{title}</p>
+                      <p className='address'>{address}</p>
+                    </div>
                   </div>
-                  <div className='detail'>
-                    <p className='title'>{title}</p>
-                    <p className='address'>{address}</p>
-                  </div>
-                </div>
-                <CopyToClipboard text={address} onCopy={() => show("Copied!")}>
-                  <img className='icon' src={CopyIcon} alt="cross-icon" height={16} width={16} />
-                </CopyToClipboard>
-              </WalletCard>
-            )
-          }
-        </Container>
+                  <CopyToClipboard text={address} onCopy={() => show("Copied!")}>
+                    <img className='icon' src={CopyIcon} alt="cross-icon" height={16} width={16} />
+                  </CopyToClipboard>
+                </WalletCard>
+              )
+            }
+          </Container>
+        </React.Fragment>
       </Dialog>
     </div>
   )

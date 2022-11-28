@@ -1,15 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
+import { Dialog } from '../../../components';
+import ModalHeader from '../../../partials/ModalHeader';
+import { Contact } from './Send';
 
 import ThreeDotIcon from "../../../assets/icons/three-dot.svg"
+import DirectionRightIcon from "../../../assets/icons/direction-right.svg"
 
 interface Props {
   className?: string;
-  contacts?: any; // update the interface later on
+  contact: Contact; // update the interface later on
 }
 
-const SendCardItem = (props: Props) => {
-  const { contacts: { name, address, icon }, className } = props;
+const Container = styled.div`
+  max-height: 250px;
+  min-height: 160px;
+  overflow: auto;
+  padding: 16px;
+`;
+
+const MenuCard = styled.div`
+  
+`
+
+const SendCardItem = ({ className, contact }: Props) => {
+  const { name, address, icon } = contact;
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const { t } = useTranslation();
+
+  const onEditContact = () => {
+    setOpenDrawer(true)
+  }
 
   return (
     <div className={className}>
@@ -21,10 +46,30 @@ const SendCardItem = (props: Props) => {
         </div>
       </div>
 
-      <div className='menu-icon'>
+      <div className='menu-icon' onClick={() => onEditContact()}>
         <img src={ThreeDotIcon} alt="menu-icon" height={13} width={3} />
       </div>
-    </div>
+
+
+      {/* wallet drawer */}
+      <Dialog fullscreen={false} open={openDrawer} onClose={setOpenDrawer}>
+        <React.Fragment>
+          <ModalHeader title={contact.name} onClose={() => setOpenDrawer(false)} onBack={() => setOpenDrawer(false)} />
+          <Container>
+            <MenuCard>
+              <div className='icon-title'>
+                <div>
+                  <img className='icon' src={DirectionRightIcon} alt="right-icon" height={16} width={16} />
+                </div>
+                <div></div>
+              </div>
+              <img className='right-icon' src={DirectionRightIcon} alt="right-icon" height={16} width={16} />
+            </MenuCard>
+            <MenuCard> </MenuCard>
+          </Container>
+        </React.Fragment>
+      </Dialog>
+    </div >
   )
 }
 
