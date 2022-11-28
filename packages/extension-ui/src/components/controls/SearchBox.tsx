@@ -32,9 +32,11 @@ const SearchBox = (props: Props) => {
           value={value}
           type={type}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e.target.value)} />
-        {clearable && <div className='action-icon' onClick={onActionClick}>
-          <img src={actionIcon} alt="action-icon" className="icon" />
-        </div>}
+        {
+          clearable && value && <div className='action-icon' onClick={onActionClick}>
+            <img src={actionIcon} alt="action-icon" className="icon" />
+          </div>
+        }
       </div>
     </div>
   );
@@ -83,7 +85,6 @@ export default styled(SearchBox)(({ clearable }: Props) => `
       background: #FFFFFF; 
       color: #0F0040;
       padding-right: ${clearable ? "40px" : "10px"};
-      background: #FFFFFF;
       border: 1px solid rgba(15, 0, 64, 0.08);
       box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.07);
       border-radius: 10px;

@@ -51,7 +51,6 @@ export default styled(QRModal)`
 
     .body{
       margin-top: 14px;
-      /* padding: 25px; */
       .qr-code-preview{
         width: 100%;
       }

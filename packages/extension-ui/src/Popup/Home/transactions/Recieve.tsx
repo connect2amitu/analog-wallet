@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next';
 import styled from 'styled-components'
 
 import { SearchBox } from '../../../components';
-import QRModal from '../../../components/modal/QRModal';
 import RecieveCardItem from './RecieveCardItem';
 
-import ScanCodeIcon from '../../../assets/icons/scan-code.svg';
 import { LogoEnum } from '../../../assets';
 
 interface Props {
@@ -18,64 +15,70 @@ export interface Assets {
   title: string;
   icon: LogoEnum;
   unit: string;
+  address: string;
 }
 
-const Recieve = ({ className }: Props) => {
-  const { t } = useTranslation();
+const ASSET_LIST: Assets[] = [
+  {
+    amount: 0,
+    icon: "bitcoin",
+    title: "Bitcoin",
+    unit: "BTC",
+    address: "BTCDokDL115..DL115tg5tg78tg78Fr"
+  },
+  {
+    amount: 0,
+    icon: "solana",
+    title: "Solana",
+    unit: "SOL",
+    address: "SOLDokDL115..DL115tg5tg78tg78Fr"
+  },
+  {
+    amount: 0,
+    icon: "polkadot",
+    title: "Polkadot",
+    unit: "DOT",
+    address: "POKADokDL115..DL115tg5tg78tg78Fr"
+  },
+  {
+    amount: 0,
+    icon: "tether",
+    title: "Tether",
+    unit: "USDT",
+    address: "THETHERDokDL115..DL115tg5tg78tg78Fr"
+  }
+]
 
+const Recieve = ({ className }: Props) => {
   const [search, setSearch] = useState("");
-  const [showQRModal, setShowQRModal] = useState(false);
   const [assets, setAssets] = useState<Assets[]>([]);
 
   useEffect(() => {
-    setAssets([
-      {
-        amount: 0,
-        icon: "bitcoin",
-        title: "Bitcoin",
-        unit: "BTC"
-      },
-      {
-        amount: 0,
-        icon: "solana",
-        title: "Solana",
-        unit: "SOL"
-      },
-      {
-        amount: 0,
-        icon: "polkadot",
-        title: "Polkadot",
-        unit: "DOT"
-      },
-      {
-        amount: 0,
-        icon: "tether",
-        title: "Tether",
-        unit: "USDT"
-      }
-    ])
+    setAssets(ASSET_LIST)
   }, [])
 
-  const onSearch = (value: string) => {
-    setSearch(value)
-  }
+  useEffect(() => {
+    let _assets = ASSET_LIST;
+
+    if (search) {
+      _assets = ASSET_LIST.filter(assets => assets.title.toLowerCase().includes(search.toLowerCase()))
+    }
+
+    setAssets(_assets)
+  }, [search])
 
   return (
     <div className={className}>
       <div className='searchbox-wrapper'>
-        <SearchBox className='searchbox' clearable={false} placeholder='Search...' name='search' value={search} onChange={onSearch} actionIcon={ScanCodeIcon} onActionClick={() => {
-          setShowQRModal(true)
+        <SearchBox className='searchbox' clearable={true} placeholder='Search...' name='search' value={search} onChange={setSearch} onActionClick={() => {
+          setSearch("")
         }} />
       </div>
       <div className='contract-container'>
         {assets.map((asset, index) =>
-          <RecieveCardItem key={index} asset={asset} />
+          <RecieveCardItem key={index} asset={asset} search={search} />
         )}
       </div>
-
-      {showQRModal && <QRModal className="qr-code" onClose={(() => setShowQRModal(false))} >
-        <div>Scan QR code</div>
-      </QRModal>}
     </div>
   )
 }
@@ -85,7 +88,7 @@ export default styled(Recieve)`
   padding: 0px 16px 0;
 
   .action-icon{
-    background: transparent;
+    /* background: transparent; */
   }
 
 }

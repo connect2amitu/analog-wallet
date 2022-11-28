@@ -21,7 +21,8 @@ export default styled(Toast) <{ visible: boolean }>`
   text-align: center;
   vertical-align: middle;
   line-height: 7px;
-  top: 13px;
+  top: 45px;
+  z-index: 999;
   left: calc(50% - 38px);
   background: #2CC99A;
   color: #fff;

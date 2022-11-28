@@ -18,7 +18,15 @@ const Container = styled.div`
   overflow: auto;
 `;
 
-const Drawer = ({ children, className, title, onClose, onBack }: any) => {
+interface Props {
+  children: React.ReactNode,
+  className?: string,
+  title: string,
+  onClose?: () => void;
+  onBack?: () => void;
+}
+
+const Drawer = ({ children, className, title, onClose, onBack }: Props) => {
   return (
     <AddAssetDrawer className={className}>
       <Container>
