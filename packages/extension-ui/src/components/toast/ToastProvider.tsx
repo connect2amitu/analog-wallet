@@ -8,13 +8,14 @@ interface ToastProviderProps {
 }
 
 const TOAST_TIMEOUT = 2000;
-
+var timerId: any;
 const ToastProvider = ({ children }: ToastProviderProps): React.ReactElement<ToastProviderProps> => {
   const [content, setContent] = useState('');
   const [visible, setVisible] = useState(false);
 
   const show = useCallback((message: string): () => void => {
-    const timerId = setTimeout(() => {
+    clearTimeout(timerId)
+    timerId = setTimeout(() => {
       setVisible(false)
     }, TOAST_TIMEOUT);
 
