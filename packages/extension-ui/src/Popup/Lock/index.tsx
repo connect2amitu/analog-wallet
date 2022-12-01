@@ -8,7 +8,6 @@ import SpiralSphereIcon from "../../assets/icons/spiralsphere.png";
 import { useContext, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
 const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required('Password is required')
@@ -25,7 +24,7 @@ const Link = styled.p`
   cursor: pointer;
   user-select: none;
   color: #4D20D9;
-  `
+`
 
 const Lock = ({ className }: { className?: string }) => {
   const [isBusy, setIsBusy] = useState(false);
@@ -87,38 +86,41 @@ const Lock = ({ className }: { className?: string }) => {
 };
 
 export default styled(Lock)`
-  display: flex;
-  flex-direction: column;
-  -webkit-box-align: center;
-  align-items: center;
-  /* margin-top: 63px; */
-  padding: 63px 16px 0px;
-  .form{
-    width: 100%;
-  }
-  .textbox{
-    margin-top: 21px;
-    width: 100%;
-  }
-  .unlock-btn{
-    margin-top: 16px;
-  }
-  .title{
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 36px;
-    text-align: center;
-    color: #0F0040;
-    margin-top:11px;
-  }
-  .subtitle{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    color: #746B92;
-    margin-top:20px;
-  } 
+display: flex;
+flex-direction: column;
+-webkit-box-align: center;
+align-items: center;
+padding: 63px 16px 0px;
+
+.form{
+  width: 100%;
+}
+
+.textbox{
+  margin-top: 21px;
+  width: 100%;
+}
+
+.unlock-btn{
+  margin-top: 16px;
+}
+
+.title{
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 36px;
+  text-align: center;
+  color: #0F0040;
+  margin-top:11px;
+}
+.subtitle{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #746B92;
+  margin-top:20px;
+} 
 
 .create-wallet-btn{
   margin-top:15px;

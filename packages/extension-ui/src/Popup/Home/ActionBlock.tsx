@@ -26,5 +26,5 @@ const ActionBlock = ({ className }: Props) => {
 }
 
 export default styled(ActionBlock)`
-margin-top: 6px;
+  margin-top: 6px;
 `

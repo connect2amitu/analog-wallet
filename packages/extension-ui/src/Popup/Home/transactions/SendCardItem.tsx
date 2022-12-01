@@ -25,52 +25,55 @@ const Container = styled.div`
 `;
 
 const MenuCard = styled.div`
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 16px;
-      box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
-      padding: 8px 12px 8px 8px;
-      border-radius: 12px;
-      background: #FFFFFF;
-      cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
+  padding: 8px 12px 8px 8px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  cursor: pointer;
 
-      &:first-of-type{
-        margin-top: 0;
-      }
+  &:first-of-type{
+    margin-top: 0;
+  }
 
-    .icon-title{
-      display: flex;
-      align-items: center;
+  .icon-title{
+    display: flex;
+    align-items: center;
 
-    .icon{
-      border-radius: 10px;
-      height: 40px;
-      width: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-    }
-    .edit-icon{
-      background: #7979f733;
-    }
-    
-    .remove-icon{
-      background: #fa958933;
-    }
-    .title{
-      margin-left: 9px;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 21px;
-      color: #0F0040;
-    }
-    }
-    .right-icon{
-      height: 12px;
-      width: 7px;
-    }
+  .icon{
+    border-radius: 10px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .edit-icon{
+    background: #7979f733;
+  }
+
+  .remove-icon{
+    background: #fa958933;
+  }
+
+  .title{
+    margin-left: 9px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #0F0040;
+  }
+
+}
+.right-icon{
+  height: 12px;
+  width: 7px;
+}
 `
 
 const SendCardItem = ({ className, contact }: Props) => {
@@ -78,8 +81,8 @@ const SendCardItem = ({ className, contact }: Props) => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
-  const { show } = useToast()
 
+  const { show } = useToast()
   const { t } = useTranslation();
 
   const onEditContact = () => {

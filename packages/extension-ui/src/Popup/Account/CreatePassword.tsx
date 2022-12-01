@@ -147,25 +147,27 @@ const CreatePassword = ({ onChange, className }: Props) => {
 }
 
 export default styled(CreatePassword)`
-  .item{
-      margin-top: 18px;
-      display: flex;
-      cursor: pointer;
-      .agree-text{
-        font-size: 14px;
-        line-height: 20px;
-        color: #746B92;
-        .link{
-          background: linear-gradient(89.78deg, #2406E2 0.19%, #7B35EE 99.81%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          font-weight: 600;
-          margin-left: 0;
-        }
-      }
+.item{
+  margin-top: 18px;
+  display: flex;
+  cursor: pointer;
+
+  .agree-text{
+    font-size: 14px;
+    line-height: 20px;
+    color: #746B92;
+
+    .link{
+      background: linear-gradient(89.78deg, #2406E2 0.19%, #7B35EE 99.81%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+      margin-left: 0;
     }
-    .continue-btn{
-      margin-top: 26px;
-    }
+  }
+}
+  .continue-btn{
+    margin-top: 26px;
+  }
 `

@@ -44,6 +44,7 @@ const WalletCard = styled.div`
   .wallet-detail-wrapper{
     display: flex;
     align-items: center;
+
     .detail{
       margin-left: 9px;
       display: flex;
@@ -64,10 +65,7 @@ const WalletCard = styled.div`
         color: #9A97A6;
       }
     }
-   
   }
-
-  
 `
 
 const DUMMY_ACCOUNTS = [
@@ -140,69 +138,69 @@ const WalletSelector = ({ className }: Props) => {
 }
 
 export default styled(WalletSelector)`
-  margin-top: 4px;
+margin-top: 4px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin-top: 10px;
+
+.box{
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 7px 3px rgb(15 0 64 / 10%);
+  border-radius: 8px;
+  height: 30px;
+  padding: 9px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  
-  .box{
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 7px 3px rgb(15 0 64 / 10%);
-    border-radius: 8px;
-    height: 30px;
-    padding: 9px;
+  justify-content: space-between;
+
+  .dot{
+    height: 7px;
+    width: 7px;
+    border: 1px solid rgba(0,225,158,0.8);
+    border-radius: 77px;
+    display: inline-block;
+    background: rgba(0,225,158,0.8);
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #00e19ecc;
+  }
+  .selected-wallet{
+    margin-left: 7px;
+    p{
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      color: #0F0040;
+      width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .address-status{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+  }
 
-      .dot{
-        height: 7px;
-        width: 7px;
-        border: 1px solid rgba(0,225,158,0.8);
-        border-radius: 77px;
-        display: inline-block;
-        background: rgba(0,225,158,0.8);
-        box-shadow: 0 0 0 2px #ffffff, 0 0 0 3px #00e19ecc;
-      }
-    .selected-wallet{
-      margin-left: 7px;
-      p{
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 18px;
-        text-align: center;
-        color: #0F0040;
-        width: 120px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .address-status{
+  .action-btn-wrap{
+    display: flex;
+    margin-left: 8px;
+    .btn{
+      height: 20px;
+      width: 20px;
+      background: #eae6fc;
+      border-radius: 4px;
       display: flex;
       align-items: center;
-    }
-
-    .action-btn-wrap{
-      display: flex;
-      margin-left: 8px;
-      .btn{
-        height: 20px;
-        width: 20px;
-        background: #eae6fc;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        
-        &.open-link{
-          margin-left: 4px;
-        }
+      justify-content: center;
+      cursor: pointer;
+      
+      &.open-link{
+        margin-left: 4px;
       }
     }
   }
+}
 `

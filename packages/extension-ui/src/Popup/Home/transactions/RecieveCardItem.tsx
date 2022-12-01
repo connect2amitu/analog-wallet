@@ -103,7 +103,6 @@ const RecieveCardItem = ({ asset, className, search = "" }: Props) => {
 }
 
 export default styled(RecieveCardItem)`
- 
   margin-top: 16px;
   display: flex;
   justify-content: space-between;
@@ -115,6 +114,7 @@ export default styled(RecieveCardItem)`
   .send-card-wrapper{
     display: flex;
     align-items: center;
+
     .detail{
       margin-left: 12px;
       display: flex;
@@ -137,7 +137,6 @@ export default styled(RecieveCardItem)`
           color: #0F0040;
           font-weight: bolder;
         }
-
       }
 
       .address{

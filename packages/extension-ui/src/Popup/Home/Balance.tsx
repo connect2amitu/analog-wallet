@@ -18,12 +18,11 @@ const Balance = ({ className }: Props) => {
 export default styled(Balance)`
 justify-content: center;
 display: flex;
+
 .balance-amount{
   font-weight: 700;
   font-size: 36px;
   line-height: 50px;
   color: #0F0040;
 }
-
-  
 `

@@ -103,8 +103,8 @@ export default styled(Send)`
   .action-icon{
     background: transparent;
   }
-
 }
+
 .contract-container{
     display: flex;
     flex-direction: column;
@@ -121,11 +121,11 @@ export default styled(Send)`
     text-align: center;
     color: #0F0040;
   }
+  
   .contract-list{
     margin-top: 8px;
     width: 100%;
   }
-
 }
 
 .add-contact-btn{

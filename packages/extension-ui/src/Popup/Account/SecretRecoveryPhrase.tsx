@@ -158,32 +158,34 @@ const SecretRecoveryPhrase = ({ onChange, className }: Props) => {
 
 
 export default styled(SecretRecoveryPhrase)`
-  .action-row{
-    margin-top: 24px;
+.action-row{
+  margin-top: 24px;
 
-    .item{
-      margin-top: 6px;
-      display: flex;
-      cursor: pointer;
-      .text{
-        margin-left: 8px;
-        font-size: 14px;
-        line-height: 20px;
-        background: linear-gradient(89.78deg, #2406E2 0.19%, #7B35EE 99.81%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      .agree-text{
-        margin-left: 8px;
-        font-size: 14px;
-        line-height: 20px;
-        color: #746B92;
-      }
+  .item{
+    margin-top: 6px;
+    display: flex;
+    cursor: pointer;
+
+    .text{
+      margin-left: 8px;
+      font-size: 14px;
+      line-height: 20px;
+      background: linear-gradient(89.78deg, #2406E2 0.19%, #7B35EE 99.81%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .agree-text{
+      margin-left: 8px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #746B92;
     }
   }
+}
 
-  .continue-btn{
-    margin-top: 18px;
-  }
+.continue-btn{
+  margin-top: 18px;
+}
 `

@@ -86,12 +86,8 @@ const Recieve = ({ className }: Props) => {
 export default styled(Recieve)`
 .searchbox-wrapper{
   padding: 0px 16px 0;
-
-  .action-icon{
-    /* background: transparent; */
-  }
-
 }
+
 .contract-container{
     margin-top: 8px;
     width: 100%;
@@ -101,6 +97,7 @@ export default styled(Recieve)`
     justify-content: flex-start;
     align-items: flex-start;
     height: calc(100vh - 155px);
+    
   .contact-label{
     font-weight: 500;
     font-size: 14px;

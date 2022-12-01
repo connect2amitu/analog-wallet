@@ -81,6 +81,7 @@ export default styled(NavBar)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .icon{
     cursor: pointer;
   }
@@ -88,37 +89,38 @@ export default styled(NavBar)`
 
 .activity-container{
   height: calc(100vh - 80px);
-  
 
   .no-activty{
     display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-  .no-activity-icon{
-    width: 165px;
-    height: 164.61px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+    .no-activity-icon{
+      width: 165px;
+      height: 164.61px;
+    }
+
+    .title{
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 36px;
+      text-align: center;
+      color: #0F0040;
+      margin-top: 17px;
+      margin-bottom: 0;
+    }
+
+    .sub-title{
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      color: #746B92;
+      margin-top: 6px;
+    }
   }
-  .title{
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
-    text-align: center;
-    color: #0F0040;
-    margin-top: 17px;
-    margin-bottom: 0;
-  }
-  .sub-title{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    color: #746B92;
-    margin-top: 6px;
-  }
-  }
-  
 }
 
 .setting-container{

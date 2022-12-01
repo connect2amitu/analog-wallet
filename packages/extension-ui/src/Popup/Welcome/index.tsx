@@ -55,27 +55,29 @@ const Welcome = ({ className }: { className?: string }) => {
 };
 
 export default styled(Welcome)`
-  display: flex;
-  flex-direction: column;
-  -webkit-box-align: center;
-  align-items: center;
-  margin: 30px 47px;
-  .title{
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
-    text-align: center;
-    color: #0F0040;
-    margin-top:11px;
-  }
-  .subtitle{
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    color: #746B92;
-    margin-top:4px;
-  } 
+display: flex;
+flex-direction: column;
+-webkit-box-align: center;
+align-items: center;
+margin: 30px 47px;
+
+.title{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  color: #0F0040;
+  margin-top:11px;
+}
+
+.subtitle{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #746B92;
+  margin-top:4px;
+} 
 
 .create-wallet-btn{
   margin-top:15px;

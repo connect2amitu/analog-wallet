@@ -16,7 +16,6 @@ const Popup = () => {
   const [isWelcomeDone, setWelcomeDone] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
-
   const _onAction = useCallback(
     (to?: string): void => {
       const _isWelcomeDone = window.localStorage.getItem('welcome_read') === 'ok';
