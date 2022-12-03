@@ -151,7 +151,7 @@ const SecretRecoveryPhrase = ({ onChange, className }: Props) => {
 
       <Button className='continue-btn' isDisabled={!agree} onClick={onChange}> {t("Continue")}</Button>
 
-    </div >
+    </div>
   )
 }
 

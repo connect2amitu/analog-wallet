@@ -146,7 +146,7 @@ const SecretRecoveryPhrase = ({ onChange, className }: Props) => {
       <Link onClick={changeSeedLength}>I have a {seedLength === 12 ? 24 : 12}-word secret recovery.</Link>
 
       <Button className='continue-btn' onClick={onChange}> {t("Continue")}</Button>
-    </div >
+    </div>
   )
 }
 

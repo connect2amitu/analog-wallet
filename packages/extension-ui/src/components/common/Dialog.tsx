@@ -49,7 +49,7 @@ const Dialog = ({ children, open = false, onClose, className = 'root-portal', el
   }, [container, open]);
 
   return ReactDOM.createPortal(
-    <DialogBody className={className} fullscreen={fullscreen} show={open}><div ref={actionsRef}>{children}</div></DialogBody>,
+    <DialogBody className={className} fullscreen={fullscreen} show={open}>{open && <div ref={actionsRef}>{children}</div>}</DialogBody>,
     container
   );
 };

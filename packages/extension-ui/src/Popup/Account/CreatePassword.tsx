@@ -142,7 +142,7 @@ const CreatePassword = ({ onChange, className }: Props) => {
 
       <Button isDisabled={!isDirty || !isValid} className='continue-btn' onClick={onChange}> {t("Continue")}</Button>
 
-    </div >
+    </div>
   )
 }
 

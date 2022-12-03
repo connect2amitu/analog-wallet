@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getLogoByNetworkKey } from '../shared/functions';
 import ModalHeader from './ModalHeader';
 
-const AddAssetDrawer = styled.div`
+const DrawerContainer = styled.div`
   height: 100vh;
   background: ${`url(${getLogoByNetworkKey("background")})`};
   background-position: center;
@@ -13,7 +13,7 @@ const AddAssetDrawer = styled.div`
   background-position: top;
 `;
 
-const Container = styled.div`
+const Body = styled.div`
   max-height: 100vh;
   overflow: auto;
 `;
@@ -28,12 +28,12 @@ interface Props {
 
 const Drawer = ({ children, className, title, onClose, onBack }: Props) => {
   return (
-    <AddAssetDrawer className={className}>
-      <Container>
+    <DrawerContainer className={className}>
+      <Body>
         {title && <ModalHeader title={title} onClose={onClose} onBack={onBack} />}
         {children}
-      </Container>
-    </AddAssetDrawer>
+      </Body>
+    </DrawerContainer>
   )
 }
 

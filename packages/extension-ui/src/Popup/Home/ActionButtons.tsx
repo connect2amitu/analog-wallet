@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next';
 
-import ReceiveIcon from "../../assets/icons/recieve.svg";
-import SendIcon from "../../assets/icons/send.svg";
 import { Dialog } from '../../components';
 import Drawer from '../../partials/Drawer';
 import Send from './transactions/Send';
 import Recieve from './transactions/Recieve';
-import ModalHeader from '../../partials/ModalHeader';
+
+import ReceiveIcon from "../../assets/icons/recieve.svg";
+import SendIcon from "../../assets/icons/send.svg";
 
 interface Props {
   className?: string;
 }
 
-const ActionButtons = ({ className }: Props) => {
+const ActionButtons = React.memo(({ className }: Props) => {
   const [openSend, setOpenSend] = useState(false);
   const [openRecieve, setOpenRecieve] = useState(false);
 
@@ -50,9 +50,9 @@ const ActionButtons = ({ className }: Props) => {
           <Send />
         </Drawer>
       </Dialog>
-    </div >
+    </div>
   )
-}
+})
 
 export default styled(ActionButtons)`
 margin-top: 15px;

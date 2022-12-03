@@ -1,6 +1,6 @@
+import React, { useState } from 'react'
 import { Button, Dialog } from '../../../components';
 import Drawer from '../../../partials/Drawer';
-import React, { useState } from 'react'
 import Highlighter from 'react-highlight-words';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -51,7 +51,7 @@ const DrawerBody = styled.div`
   }
 `
 
-const RecieveCardItem = ({ asset, className, search = "" }: Props) => {
+const RecieveCardItem = React.memo(({ asset, className, search = "" }: Props) => {
   const [showQRModal, setShowQRModal] = useState(false)
   const [selectedNetwork, setSelectedNetwork] = useState<Assets | null>(null)
   const { t } = useTranslation();
@@ -60,34 +60,38 @@ const RecieveCardItem = ({ asset, className, search = "" }: Props) => {
   const { title } = asset;
 
   const onCopy = () => {
-    console.info(`onCopy called`)
     show(t("Copied!"))
+    setShowQRModal(false)
   }
 
   return (
-    <div className={className}>
-      <div className='send-card-wrapper' onClick={() => { setSelectedNetwork(asset); setShowQRModal(true) }}>
-        <img src={getLogoByNetworkKey(asset.icon)} alt="cross-icon" height={30} width={30} />
-        <div className='detail'>
-          <p className='title'>
-            <Highlighter
-              className='text'
-              highlightClassName="highlight"
-              unhighlightClassName="unhighlight"
-              searchWords={search.split(" ")}
-              autoEscape={true}
-              textToHighlight={`${title}`}
-            /></p>
+    <>
+      <div className={className} onClick={() => { setSelectedNetwork(asset); setShowQRModal(true) }}>
+        <div className='send-card-wrapper'>
+          <img src={getLogoByNetworkKey(asset.icon)} alt="cross-icon" height={30} width={30} />
+          <div className='detail'>
+            <p className='title'>
+              <Highlighter
+                className='text'
+                highlightClassName="highlight"
+                unhighlightClassName="unhighlight"
+                searchWords={search.split(" ")}
+                autoEscape={true}
+                textToHighlight={`${title}`}
+              /></p>
+          </div>
+        </div>
+
+        <div className='amount-meta'>
+          <span>{asset.amount} {asset.unit}</span>
         </div>
       </div>
 
-      <div className='amount-meta'>
-        <span>{asset.amount} {asset.unit}</span>
-      </div>
 
       <Dialog fullscreen={true} open={showQRModal}>
         <Drawer onBack={() => setShowQRModal(false)} title={`Receive ${selectedNetwork?.unit}`} >
           <DrawerBody>
+            {showQRModal ? "true" : "false"}
             <div className='qr-code-preview'>
               <img src={DummyQRCodeIcon} alt="qr-code" />
               <p className='guide-text'>{selectedNetwork?.address}</p>
@@ -98,9 +102,9 @@ const RecieveCardItem = ({ asset, className, search = "" }: Props) => {
           </DrawerBody>
         </Drawer>
       </Dialog>
-    </div>
+    </>
   )
-}
+})
 
 export default styled(RecieveCardItem)`
   margin-top: 16px;

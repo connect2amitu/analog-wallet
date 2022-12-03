@@ -32,7 +32,7 @@ export default styled(ModalHeader)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 16px 14px;
+  padding: 16px;
 
   .title{
     font-weight: 600;

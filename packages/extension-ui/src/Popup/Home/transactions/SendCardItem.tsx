@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Dialog } from '../../../components';
+import { Button, Dialog, TextBox } from '../../../components';
 import ModalHeader from '../../../partials/ModalHeader';
 import { Contact } from './Send';
 import { useToast } from '../../../components/toast/ToastProvider';
@@ -22,6 +22,35 @@ const Container = styled.div`
   min-height: 160px;
   overflow: auto;
   padding: 16px;
+`;
+
+const EditContiner = styled.div`
+  .edit-body{
+    padding-top: 0;
+    .row{
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      :first-of-type{
+        margin-top: 0;
+      }
+
+      .textbox{
+        margin-top: 2px;
+      }
+      span{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+        color: #746B92;
+      }
+    }
+  }
+  .save-btn{
+    margin-top: 16px;
+  }
 `;
 
 const MenuCard = styled.div`
@@ -86,7 +115,7 @@ const SendCardItem = ({ className, contact }: Props) => {
   const { t } = useTranslation();
 
   const onEditContact = () => {
-    setOpenDrawer(true)
+    setOpenDrawer(prev => !prev)
   }
 
   const onSave = () => {
@@ -96,19 +125,19 @@ const SendCardItem = ({ className, contact }: Props) => {
   }
 
   return (
-    <div className={className}>
-      <div className='send-card-wrapper'>
-        <img src={icon} alt="cross-icon" height={40} width={40} />
-        <div className='detail'>
-          <p className='title'>{name}</p>
-          <p className='address'>{address}</p>
+    <React.Fragment>
+      <div className={className}>
+        <div className='send-card-wrapper'>
+          <img src={icon} alt="cross-icon" height={40} width={40} />
+          <div className='detail'>
+            <p className='title'>{name}</p>
+            <p className='address'>{address}</p>
+          </div>
+        </div>
+        <div className='menu-icon' onClick={() => onEditContact()}>
+          <img src={ThreeDotIcon} alt="menu-icon" height={13} width={3} />
         </div>
       </div>
-
-      <div className='menu-icon' onClick={() => onEditContact()}>
-        <img src={ThreeDotIcon} alt="menu-icon" height={13} width={3} />
-      </div>
-
 
       {/* wallet drawer */}
       <Dialog fullscreen={false} open={openDrawer} onClose={setOpenDrawer}>
@@ -140,14 +169,23 @@ const SendCardItem = ({ className, contact }: Props) => {
 
       {/* wallet drawer */}
       <Dialog fullscreen={false} open={openEditContact} onClose={() => setOpenEditContact(false)}>
-        <React.Fragment>
+        <EditContiner>
           <ModalHeader title={"Edit Contact"} onClose={() => { setOpenDrawer(true); setOpenEditContact(false) }} onBack={() => { setOpenDrawer(true); setOpenEditContact(false) }} />
-          <Container>
-            <Button onClick={onSave}>{t("Save")}</Button>
+          <Container className='edit-body'>
+            <div className='row'>
+              <span>{t("Name")}</span>
+              <TextBox className='textbox' name="name" type='text' value={name} />
+            </div>
+            <div className='row'>
+              <span>{t("Address")}</span>
+              <TextBox className='textbox' name="address" type='text' value={address} />
+            </div>
+            <Button className='save-btn' onClick={onSave}>{t("Save")}</Button>
           </Container>
-        </React.Fragment>
+        </EditContiner>
       </Dialog>
-    </div >
+    </React.Fragment>
+
   )
 }
 

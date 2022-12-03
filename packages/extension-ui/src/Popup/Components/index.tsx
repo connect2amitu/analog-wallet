@@ -156,7 +156,7 @@ const Components = ({ className }: { className?: string }) => {
             <div style={{ color: error.number ? "" : "green" }}>{error.number ? "✅" : "❌"}Number (0-9)</div>
             <div style={{ color: error.specialChar ? "" : "green" }}>{error.specialChar ? "✅" : "❌"}Special Character (!@#$%^&*)</div>
             <div style={{ color: error.limit ? "" : "green" }}>{error.limit ? "✅" : "❌"}Atleast 8 Character</div>
-          </div >
+          </div>
           <br />
 
 
@@ -352,7 +352,7 @@ const Components = ({ className }: { className?: string }) => {
         </Wrapper>
 
       </Container >
-    </div >
+    </div>
   );
 };
 

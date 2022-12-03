@@ -48,7 +48,6 @@ const Form = () => {
           <TextBox
             label="Password"
             type="password"
-            props={{ ...register('password') }}
           />
           <div className="invalid-feedback">{errors.password?.message}</div>
         </div>
@@ -56,7 +55,6 @@ const Form = () => {
           <TextBox
             label="Confirm Password"
             type="password"
-            props={{ ...register('confirmPassword') }}
           />
           <div className="invalid-feedback">
             {errors.confirmPassword?.message}

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next';
+import { size } from 'lodash';
 
 import { Button, SearchBox } from '../../../components';
 import SendCardItem from './SendCardItem';
+import EmptyContactList from './EmptyContactList';
 
-import ScanCodeIcon from '../../../assets/icons/scan-code.svg';
-import DummyQRCodeIcon from '../../../assets/icons/dummy-qr.svg';
-import UserIcon from '../../../assets/icons/user.svg';
 import QRModal from '../../../components/modal/QRModal';
 import ModalHeader from '../../../partials/ModalHeader';
+
+import UserIcon from '../../../assets/icons/user.svg';
+import ScanCodeIcon from '../../../assets/icons/scan-code.svg';
+import DummyQRCodeIcon from '../../../assets/icons/dummy-qr.svg';
 
 interface Props {
   className?: string;
@@ -76,11 +79,15 @@ const Send = ({ className }: Props) => {
         <div className='contact-label'>
           <span>{t("Contact")}:</span>
         </div>
-        <div className='contract-list'>
-          {contacts.map((contact, index) =>
-            <SendCardItem key={index} contact={contact} />
-          )}
-        </div>
+        {size(contacts) > 0 ?
+          <div className='contract-list'>
+            {contacts.map((contact, index) =>
+              <SendCardItem key={index} contact={contact} />
+            )}
+
+          </div> :
+          <EmptyContactList />
+        }
       </div>
       <div className="add-contact-btn">
         <Button onClick={onAddContact}>{t("Add Contact")}</Button>
@@ -126,6 +133,8 @@ export default styled(Send)`
     margin-top: 8px;
     width: 100%;
   }
+ 
+ 
 }
 
 .add-contact-btn{

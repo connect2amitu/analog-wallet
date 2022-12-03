@@ -4,12 +4,12 @@ import { Controller } from "react-hook-form";
 import { get } from 'lodash'
 import { ThemeProps } from '@analog/extension-ui/types';
 
-interface Props {
-  label: string;
+interface Props extends ThemeProps {
+  label?: string;
   control?: any;
   errors?: any;
   name: string;
-  type: "text" | "password";
+  type?: "text" | "password";
   className?: string;
   value?: string;
   info?: React.ReactNode;
@@ -43,10 +43,10 @@ const TextBox = (props: Props) => {
   );
 };
 
-export default styled(TextBox)(({ theme }: ThemeProps) => `
+export default styled(TextBox)(({ theme, label }: Props) => `
 height: auto;
 margin-top: 10px;
-
+width: 100%;
 .container{
   position: relative;
     height: 50px;
@@ -63,14 +63,13 @@ margin-top: 10px;
 
   input{
     border: none;
-    padding-top: 15px;
+    padding-top: ${label ? "15px" : "0px"};
     font-size: 16px;
     display: block;
     box-sizing: border-box;
     width: 100%;
     bottom: 0px;
     height: 100%;
-    /* background: rgba(51,51,51,0.1); */
     color: #333333;
     padding-left: 16px;
     border-radius: 12px;
