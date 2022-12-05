@@ -6,6 +6,7 @@ import { Button, Dialog, TextBox } from '../../../components';
 import ModalHeader from '../../../partials/ModalHeader';
 import { Contact } from './Send';
 import { useToast } from '../../../components/toast/ToastProvider';
+import Menu from '../../../components/Menu';
 
 import ThreeDotIcon from "../../../assets/icons/three-dot.svg"
 import DirectionRightIcon from "../../../assets/icons/direction-right.svg"
@@ -18,15 +19,8 @@ interface Props {
 }
 
 const Container = styled.div`
-  max-height: 250px;
-  min-height: 160px;
-  overflow: auto;
-  padding: 16px;
-`;
-
-const EditContiner = styled.div`
-  .edit-body{
-    padding-top: 0;
+  .body{
+    padding: 16px;
     .row{
       margin-top: 16px;
       display: flex;
@@ -45,6 +39,34 @@ const EditContiner = styled.div`
         line-height: 18px;
         text-align: center;
         color: #746B92;
+      }
+
+      .title{
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        color: #0F0040;
+      }
+
+      &.center{
+        align-items: center;
+      }
+
+      &.action-btns{
+        flex-direction: row;
+        gap: 8px;
+
+        .cancel-btn{
+          background: linear-gradient(89.78deg, rgba(36, 6, 226, 0.1) 0.19%, rgba(123, 53, 238, 0.1) 99.81%);
+          color: #4D20D9;
+        }
+        
+        .confirm-btn{
+          color: #DF2A1E;
+          background: rgba(223, 30, 76, 0.1);
+          background-blend-mode: darken;
+        }
       }
     }
   }
@@ -110,6 +132,7 @@ const SendCardItem = ({ className, contact }: Props) => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
+  const [openDeleteContact, setOpenDeleteContact] = useState(false);
 
   const { show } = useToast()
   const { t } = useTranslation();
@@ -124,54 +147,36 @@ const SendCardItem = ({ className, contact }: Props) => {
     setOpenDrawer(true)
   }
 
+  const onCloseConfirm = () => {
+    setOpenDeleteContact(false)
+    setOpenDrawer(false)
+  }
+
+  const onSubmit = () => {
+    show(t("Deleted!"))
+    onCloseConfirm()
+  }
+
   return (
     <React.Fragment>
-      <div className={className}>
-        <div className='send-card-wrapper'>
-          <img src={icon} alt="cross-icon" height={40} width={40} />
-          <div className='detail'>
-            <p className='title'>{name}</p>
-            <p className='address'>{address}</p>
-          </div>
-        </div>
-        <div className='menu-icon' onClick={() => onEditContact()}>
-          <img src={ThreeDotIcon} alt="menu-icon" height={13} width={3} />
-        </div>
-      </div>
+      <Menu className={className} onAction={() => onEditContact()} title={name} subTitle={address} actionIcon={ThreeDotIcon} icon={icon} />
 
-      {/* wallet drawer */}
+      {/* contact menu drawer */}
       <Dialog fullscreen={false} open={openDrawer} onClose={setOpenDrawer}>
-        <React.Fragment>
+        <Container>
           <ModalHeader title={contact.name} onClose={() => setOpenDrawer(false)} onBack={() => setOpenDrawer(false)} />
-          <Container>
-            <MenuCard onClick={() => setOpenEditContact(true)}>
-              <div className='icon-title'>
-                <div className='edit-icon icon'>
-                  <img className='icon' src={PencilIcon} alt="edit-icon" height={24} width={24} />
-                </div>
-                <div className='title'>{t("Edit Contact")}</div>
-              </div>
-              <img className='right-icon' src={DirectionRightIcon} alt="right-icon" height={16} width={16} />
-            </MenuCard>
-            <MenuCard>
-              <div className='icon-title'>
-                <div className='remove-icon icon'>
-                  <img className='icon' src={BinIcon} alt="bin-icon" height={24} width={24} />
-                </div>
-                <div className='title'>{t("Remove Contact")}</div>
-              </div>
-              <img className='right-icon' src={DirectionRightIcon} alt="right-icon" height={16} width={16} />
-            </MenuCard>
-            {/* <MenuCard> </MenuCard> */}
-          </Container>
-        </React.Fragment>
+          <div className='body'>
+            <Menu onClick={() => setOpenEditContact(true)} title={t("Edit Contact ")} icon={PencilIcon} />
+            <Menu onClick={() => setOpenDeleteContact(true)} title={t("Remove Contact ")} icon={BinIcon} />
+          </div>
+        </Container>
       </Dialog>
 
-      {/* wallet drawer */}
+      {/* edit contact drawer */}
       <Dialog fullscreen={false} open={openEditContact} onClose={() => setOpenEditContact(false)}>
-        <EditContiner>
+        <Container>
           <ModalHeader title={"Edit Contact"} onClose={() => { setOpenDrawer(true); setOpenEditContact(false) }} onBack={() => { setOpenDrawer(true); setOpenEditContact(false) }} />
-          <Container className='edit-body'>
+          <div className='body'>
             <div className='row'>
               <span>{t("Name")}</span>
               <TextBox className='textbox' name="name" type='text' value={name} />
@@ -181,8 +186,28 @@ const SendCardItem = ({ className, contact }: Props) => {
               <TextBox className='textbox' name="address" type='text' value={address} />
             </div>
             <Button className='save-btn' onClick={onSave}>{t("Save")}</Button>
-          </Container>
-        </EditContiner>
+          </div>
+        </Container>
+      </Dialog>
+
+      {/* delete confirm drawer */}
+      <Dialog fullscreen={false} open={openDeleteContact} onClose={() => setOpenDeleteContact(false)}>
+        <Container>
+          <ModalHeader title={""} onClose={() => { setOpenDrawer(true); setOpenDeleteContact(false) }} onBack={() => { setOpenDrawer(true); setOpenDeleteContact(false) }} />
+          <div className='body'>
+            <div className='row center'>
+              <img className='icon' src={BinIcon} alt="bin-icon" height={94} width={94} />
+            </div>
+            <div className='row'>
+              <p className='title'>Are you sure you want to delete  wallet 1(fvjdhhf..33fdugcd)?</p>
+            </div>
+            <div className='row action-btns'>
+              <Button className='cancel-btn' onClick={onCloseConfirm}>{t("No")}</Button>
+              <Button className='confirm-btn' onClick={onSubmit}>{t("Yes")}</Button>
+            </div>
+
+          </div>
+        </Container>
       </Dialog>
     </React.Fragment>
 
@@ -190,50 +215,13 @@ const SendCardItem = ({ className, contact }: Props) => {
 }
 
 export default styled(SendCardItem)`
-
-background: #FFFFFF;
-  box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
-  border-radius: 12px;
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px;
-
-  .send-card-wrapper{
-    display: flex;
-    align-items: center;
-    .detail{
-      margin-left: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      .title{
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        color: #0F0040;
-      }
-
-      .address{
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 18px;
-        color: #9A97A6;
-      }
+  .left{
+    .avatar {
+      padding: 0;
     }
-  }
-
-  .menu-icon{
-    cursor: pointer;
-    padding: 10px;
-    display: flex;
   }
 
   :first-of-type{
     margin-top: 0;
   }
-
-
 `

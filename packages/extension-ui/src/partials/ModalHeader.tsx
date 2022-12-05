@@ -38,6 +38,7 @@ export default styled(ModalHeader)`
     font-weight: 600;
     font-size: 16px;
     color: #0F0040;
+    min-height: 20px;
   }
   
   .close-icon{

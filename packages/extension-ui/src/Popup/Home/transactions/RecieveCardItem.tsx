@@ -20,7 +20,7 @@ interface Props {
 
 const DrawerBody = styled.div`
   margin-top: 57px;
-  height: calc(100vh - 105px);
+  height: calc(100vh - 110px);
   position: relative;
   .qr-code-preview{
     width: calc(100% - 96px);
@@ -61,7 +61,7 @@ const RecieveCardItem = React.memo(({ asset, className, search = "" }: Props) =>
 
   const onCopy = () => {
     show(t("Copied!"))
-    setShowQRModal(false)
+    // setShowQRModal(false)
   }
 
   return (

@@ -7,6 +7,7 @@ export { default as Checkbox } from './controls/Checkbox';
 export { default as TextBox } from './controls/TextBox';
 export { default as SearchBox } from './controls/SearchBox';
 export { default as Switch } from './controls/Switch';
+export { default as Menu } from './Menu';
 
 export { default as Tabs } from './tabs';
 export { default as Dialog } from './common/Dialog';

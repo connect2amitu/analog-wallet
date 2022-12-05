@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { Header, Sidebar } from "../../components";
+import Settings from "../Settings";
 
 import HamburgerIcon from "../../assets/icons/hamburger.svg";
 import ActivityIcon from "../../assets/icons/activity.svg";
@@ -48,10 +49,7 @@ const NavBar = (props: Props) => {
 
       </div>
       <Sidebar open={openMenubar}>
-        <Header title="Settings" subTitle="" onBack={() => { setOpenMenubar(false) }} />
-        <div className="setting-container">
-          <h1 className="title">Coming soon</h1>
-        </div>
+        <Settings title="Settings" onBack={() => setOpenMenubar(false)} />
       </Sidebar>
 
       <Sidebar open={openActivity}>

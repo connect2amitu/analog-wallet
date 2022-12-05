@@ -42,7 +42,7 @@ const SearchBox = (props: Props) => {
   );
 };
 
-export default styled(SearchBox)(({ clearable }: Props) => `
+export default styled(SearchBox)(({ clearable = true }: Props) => `
   height: auto;
   margin-top: 10px;
 

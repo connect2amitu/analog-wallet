@@ -50,6 +50,7 @@ module.exports = {
       component: 'Trans'
     }
   },
+  react: { useSuspense: false },
   output: './',
   transform
 };

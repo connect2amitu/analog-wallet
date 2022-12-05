@@ -70,7 +70,7 @@ const Recieve = ({ className }: Props) => {
   return (
     <div className={className}>
       <div className='searchbox-wrapper'>
-        <SearchBox className='searchbox' clearable={true} placeholder='Search...' name='search' value={search} onChange={setSearch} onActionClick={() => {
+        <SearchBox className='searchbox' placeholder='Search...' name='search' value={search} onChange={setSearch} onActionClick={() => {
           setSearch("")
         }} />
       </div>

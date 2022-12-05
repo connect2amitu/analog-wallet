@@ -3,15 +3,14 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import { Dialog } from '../../components';
+import { Dialog, Menu } from '../../components';
 import { useToast } from '../../components/toast/ToastProvider';
 import ModalHeader from '../../partials/ModalHeader';
+import useCopyToClipboard from '../../hooks/useCopyToClipboard';
 
 import CopyIcon from "../../assets/icons/copy-gradient.svg";
 import OpenIcon from "../../assets/icons/open-icon.svg";
-import WalletOneIcon from "../../assets/icons/wallet-1.svg";
-import WalletTwoIcon from "../../assets/icons/wallet-2.svg";
-
+import WalletIcon from "../../assets/icons/wallet.svg";
 
 interface Props {
   className?: string;
@@ -24,68 +23,26 @@ const Container = styled.div`
   padding:16px;
 `;
 
-const WalletCard = styled.div`
-  background: #FFFFFF;
-  box-shadow: 0px 4px 30px rgba(15, 0, 64, 0.1);
-  border-radius: 12px;
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  &:first-of-type{
-    margin-top: 0;
-  }
-
-  .icon{
-    cursor: pointer;
-  }
-
-  .wallet-detail-wrapper{
-    display: flex;
-    align-items: center;
-
-    .detail{
-      margin-left: 9px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      .title{
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        color: #0F0040;
-      }
-
-      .address{
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 18px;
-        color: #9A97A6;
-      }
-    }
-  }
-`
-
 const DUMMY_ACCOUNTS = [
   {
     title: "Wallet 1",
-    icon: WalletOneIcon,
+    icon: WalletIcon,
     type: "",
-    address: "DokDL115tg78Fr...15tg78Fr"
+    address: "1FfmbHfnpaZjKF...okTjJJusN455paPH"
   }, {
     title: "Wallet 2",
-    icon: WalletTwoIcon,
+    icon: WalletIcon,
     type: "",
-    address: "DokDL115tg78Fr...15tg78Fr"
+    address: "mb7bmbgt2vcy9d....irr6kxy63ihd31"
   }
 ]
 
 const WalletSelector = ({ className }: Props) => {
-  const { t } = useTranslation();
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const { t } = useTranslation();
   const { show } = useToast();
+  const copy = useCopyToClipboard()
 
   return (
     <div className={className}>
@@ -114,20 +71,7 @@ const WalletSelector = ({ className }: Props) => {
           <Container>
             {
               DUMMY_ACCOUNTS.map(({ title, icon, address }, index) =>
-                <WalletCard key={index}>
-                  <div className='wallet-detail-wrapper'>
-                    <div>
-                      <img src={icon} alt="cross-icon" height={32} width={32} />
-                    </div>
-                    <div className='detail'>
-                      <p className='title'>{title}</p>
-                      <p className='address'>{address}</p>
-                    </div>
-                  </div>
-                  <CopyToClipboard text={address} onCopy={() => show("Copied!")}>
-                    <img className='icon' src={CopyIcon} alt="cross-icon" height={16} width={16} />
-                  </CopyToClipboard>
-                </WalletCard>
+                <Menu key={index} onAction={() => { copy(address); }} title={title} subTitle={address} actionIcon={CopyIcon} icon={icon} />
               )
             }
           </Container>

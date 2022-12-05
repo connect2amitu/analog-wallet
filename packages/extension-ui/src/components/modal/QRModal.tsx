@@ -40,14 +40,31 @@ export default styled(QRModal)`
  
 &.modal-container {
   .select-modal{
-    width: calc(100% - 32px);
+    width: calc(100% - 120px);
     border-radius: 12px;
-    .heading{
+    .qr-code-header{
+     padding: 0;
+     .title{
       font-weight: 600;
       font-size: 14px;
       line-height: 21px;
       color: #0F0040;
+     }
+
+     .close-icon{
+      position: absolute;
+      right: 0;
+      top: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      img{
+        height: 10px;
+        width: 10px;
+      }
     }
+
+    }
+
 
     .body{
       margin-top: 14px;
